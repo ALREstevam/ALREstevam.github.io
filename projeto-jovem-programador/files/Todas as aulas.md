@@ -723,6 +723,52 @@ Você pode ler o *else* como: *Execute essa ação se algo acontecer, **caso con
 
 
 
+#### Subeventos
+
+Subeventos são maneiras de condesar o código e evitar repetição. imagine que você tem que programar o seguinte:
+
+
+
+*Se o jogador encostar numa alavanca um som deve ser tocado, se ele apertar a tecla `x` a alavanca deve mudar de posição*
+
+
+
+Sem o uso de sub eventos a solução poderia ser assim:
+
+
+
+```
+SE (jogador está encostando na alavanca):
+	toque o som
+SE (jogador está encostado na alavanca E a tecla x está sendo apertada):
+	mude a posição da alavanca
+```
+
+
+
+![52146410232](imgs\1521464102322.png)
+
+
+
+Veja que uma das condições se repete, podemos  condensar isso usando um subevento da seguinte forma:
+
+
+
+```
+SE (jogador está encostando na alavanca):
+	toque o som
+	SE (tecla x está sendo apertada):
+		mude a posição da alavanca
+```
+
+![52146422229](imgs\1521464222292.png)
+
+
+
+Para criar um subevento use:
+
+![52146428287](imgs\1521464282875.png)
+
 
 
 
@@ -973,6 +1019,10 @@ Vamos aplicar aos três o *Behavior* de `Jump Tru` que fará com que o personage
 ![](imgs/platformcolison.png)
 
 ![](imgs/onewaycolison.png)
+
+Obs.: aqui existe um caso especial qm que precisamos colocar a caixa de colisão um pouco abaixo da imagem, caso contrário o jogador aparecerá flutuando na base.
+
+
 
 ![](imgs/bridgecolison.png)
 
@@ -1611,8 +1661,8 @@ Existem duas formas de fazer isso, essa é a mais simples de entender, mas gasta
 	*Caso contrário*
 	
 		*Mude o valor em `Direction` para `0`*
-	
 
+Para adicionar a condição e o *else* você precisará ir em `Add new > Sub event` 
 Para adicionar a condição e o *else* você precisará ir em `Add new > Sub event` 
 Para adicionar a condição e o *else* você precisará ir em `Add new > Sub event` 
 
@@ -1691,8 +1741,6 @@ Redimensione o resultado para apenas três corações aparecerem em cada imagem 
 
 Agora, se tirarmos uns dos corações vermelhos, a imagem que está por baixo será mostrada.
 
-
-
 Precisaremos alterar o bloco que lida com a morte do jogador:
 
 
@@ -1744,6 +1792,22 @@ Se o jogador tiver 20 moedas e perder 5: `max((20 - 5), 0)`, como $$(20-5 = 15)$
 Se o jogador tiver 1 moeda e perder 5 `max((1 - 5), 0)`, como $$(1 - 5 = -4)$$ e $$(0 > -4)$$  o jogador fica com 0 moedas e não com -4
 
 
+
+# Coletando vidas
+
+No nosso jogo o jogador terá três vidas, vamos incluir uma vida como um item no jogo.
+
+Crie um novo objeto do tipo `Sprite` com o nome `Life` e com uma animação com os arquivos em `Items/HearthShine/*`
+
+
+
+![52140321186](C:\Users\andre\Documents\GitHub\Projeto---Construct3---Programa--o-de-jogos-nas-escolas\apostilas\imgs\1521403211869.png)
+
+
+
+
+
+![52140323512]()
 
 # Projéteis
 
@@ -1962,24 +2026,6 @@ Já programamos a morte do inimigo pelo jogador, precisamos fazer o inverso agor
 
 
 
-# Vidas
-
-No nosso jogo o jogador terá três vidas, vamos incluir uma vida como um item no jogo.
-
-Crie um novo objeto do tipo `Sprite` com o nome `Life` e com uma animação com os arquivos em `Items/HearthShine/*`
-
-
-
-![52140321186](imgs\1521403211869.png)
-
-
-
-
-
-![52140323512](imgs\1521403235128.png)
-
-
-
 # Sons
 
 Uma parte muito importante de um jogo é o som, no nosso jogo vamos adicionar um objeto do tipo `Audio` para poder tocar sons:
@@ -2079,19 +2125,19 @@ Espere os sons carregarem e o botão `Import` ser liberado, então clique nele
 
 
 
-# Dicas
+# Dicas e solução de problemas
 
-1. Se você tentou **mudar o cenário** e não conseguiu, verifique se o desenho do cadeado está marcado como fechado e clique para marca-lo como aberto, cadeado fechado indica que a camada não pode ser editada
-2. Se você percebeu que o cenário que estava fazendo **desapareceu**, verifique se a caixa de checagem antes do cadeado está desmarcada, caixas desmarcadas indicam que o que estiver naquela camada não deve ser mostrado na tela
+## Mudanças no cenário
 
-Vamos começar mudando o nome dessa camada, clique no nome dela para seleciona-la, você verá que o conteúdo do menu de propriedades mudará.
+Se você tentou **mudar o cenário** e não conseguiu, verifique se o desenho do cadeado está marcado como fechado e clique para marca-lo como aberto, cadeado fechado indica que a camada não pode ser editada
 
-Vá no campo `name` e mude o valor dele de `layer 0` para `game` e aperte `enter` para confirmar
 
-![](imgs/layernamechange.PNG)
 
-#### Dicas
-**Menus sumiram**
+Se você percebeu que o cenário que estava fazendo **desapareceu**, verifique se a caixa de checagem antes do cadeado está desmarcada, caixas desmarcadas indicam que o que estiver naquela camada não deve ser mostrado na tela
+
+
+
+## Menus sumiram
 
 Se você perceber que algum dos menus citados anteriormente desapareceu, o coloque de volta usando o menu `menu > View > Bars`
 
@@ -2099,7 +2145,10 @@ Se você perceber que algum dos menus citados anteriormente desapareceu, o coloq
 você perceberá que caso clique em um menu faltante (tirando os três últimos da lista que estão disponíveis apenas na versão paga do Construct) ele aparecerá na tela, você pode arrasta-lo para a posição que desejar.
 
 ![](imgs/meuposicoes.png)
-**Nomes**
+
+
+
+## Nomeando objetos
 
 ![](imgs/renameem.png)
 
@@ -2110,7 +2159,8 @@ Use `F2` com o mouse sob o campo que quer editar ou use a ferramenta de renomear
 ![](imgs/renamemenu.png)
 
 
-**Teclas de atalho e uso do mouse**
+
+## Teclas de atalho e uso do mouse
 
 * Use a tecla `F11` para colocar ou tirar a ferramenta da tela cheia
 * Use `shift + roda do mouse` para dar zoom no cenário
@@ -2123,19 +2173,27 @@ Use `F2` com o mouse sob o campo que quer editar ou use a ferramenta de renomear
 
 
 
-**Dica:** Caso as abas **Layout** ou **Event Sheet** desapareçam, use este menu para abri-las novamente, você pode dar um clique duplo ou usar o botão direito do mouse.
+
+## Abas sumiram
+
+Caso as abas **Layout** ou **Event Sheet** desapareçam, use este menu para abri-las novamente, você pode dar um clique duplo ou usar o botão direito do mouse.
 ![](imgs/mousemenu.png)
 
-**Dica:** ao mudar o tamanho de objetos, você pode apertar `Shift` e arrastar o mouse clicando em uma das abas para mudar o **tamanho** do objeto sem fazer com que ele seja distorcido
 
 
-**Dica:** na hora de posicionar a plataforma que se movimenta no layout, coloque-a no **meio** da área que deve cobrir com o movimento
-
-**Dica:** depois de ter todas as plataformas prontas você pode criar uma cópia facilmente clicando e arrastando uma plataforma pronta enquanto segura a tecla `crtl`
-
-**Dica:**
+## Layout
 
 
+
+* Ao mudar o tamanho de objetos, você pode apertar Shift e arrastar o mouse clicando em uma das abas para mudar o tamanho do objeto sem fazer com que ele seja distorcido
+
+* Na hora de posicionar a plataforma que se movimenta no layout, coloque-a no **meio** da área que deve cobrir com o movimento
+
+  *Depois de ter todas as plataformas prontas você pode criar uma cópia facilmente clicando e arrastando uma plataforma pronta enquanto segura a tecla `crtl`
+
+
+
+## Propriedades do projeto
 
 Clique na parte cinza (fora de qualquer objeto), na aba de propriedades serão mostradas as propriedades do projeto como um todo, marque a opção `Show Grid`, `Snap to Grid` e defina `Grid size` como `16x16` (ou o tamanho dependendo do projeto, normalmente `16x16`, `32x32`, `64x64` ou `128x128`)
 
@@ -2143,9 +2201,11 @@ Clique na parte cinza (fora de qualquer objeto), na aba de propriedades serão m
 
 ![52138512986](imgs\1521385129865.png)
 
-
-
 Caso ache interessante, pode ativar a opção `Show Collision Polygons` que mostrará os polígonos de colisão dos objetos no jogo.
+
+
+
+## Criação do cenário
 
  Tenha um esboço feito de antemão, com ele tente deduzir
   * A largura do cenário
