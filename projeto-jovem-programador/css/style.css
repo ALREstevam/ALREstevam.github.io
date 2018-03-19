@@ -1,0 +1,82 @@
+@font-face {
+    		font-family: eightbitfont;
+    		src: url("../fonts/webpixel bitmap_black.otf");
+		}
+
+		html, body{
+			font-family: eightbitfont;
+			width: 100%;
+ 			height: 100%;
+ 			background: url('../webimages/tiled_bg.png');
+ 			background-size: 10%;
+ 			color: whitesmoke;
+		}
+
+		* {
+		  padding: 0px;
+		  margin: 0px;
+		}
+
+
+
+		.topImage{
+			width: 100%;
+			height: 100%;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: contain;
+			min-height: 50em;
+			background: url('../webimages/projeto-jp.png') center center no-repeat;
+			background-size: contain;
+			
+			
+		}
+
+		.topImage:before{
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			/*background-image: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(248,248,248,0.2) 75%, rgba(246,246,246,0.7) 90%, rgba(238,238,238,1) 99%, rgba(237,237,237,1) 100%);
+			*/o
+			pacity: .6;
+		}
+
+		.imgcontainer{
+			
+		}
+
+		button{
+			border-radius: 0px;
+			border: none;
+			padding: 10px;
+			font-size: 30pt;
+			cursor: pointer;
+		}
+
+		button.subscribe{
+			font-size: 80pt;
+			padding: 50px;
+			font-family: eightbitfont;
+			background-color: #37DB37;
+			color: #077707;
+		}
+
+		.centered{
+			width: 100%;
+			text-align: center;
+		}
+
+		#textbox{
+			width: 50%;
+			align-self: center;
+			margin: auto;
+			font-size: 30pt;
+
+		}
+
+		button{
+
+		}
