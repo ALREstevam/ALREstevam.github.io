@@ -12,10 +12,11 @@
  			color: whitesmoke;
 		}
 
-		* {
+		*{
 		  padding: 0px;
 		  margin: 0px;
 		}
+
 
 
 
@@ -52,17 +53,23 @@
 			border-radius: 0px;
 			border: none;
 			padding: 10px;
-			font-size: 30pt;
 			cursor: pointer;
+			font-size: 50pt;
+			font-family: eightbitfont;
 		}
 
 		button.subscribe{
-			font-size: 80pt;
-			padding: 50px;
-			font-family: eightbitfont;
+			padding: 30px;
 			background-color: #37DB37;
 			color: #077707;
 		}
+
+		button.content{
+			padding: 30px;
+			background-color: #37DB37;
+			color: #077707;
+		}
+
 
 		.centered{
 			width: 100%;
