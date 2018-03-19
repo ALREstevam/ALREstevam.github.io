@@ -24,13 +24,13 @@
 
 
 
-![](imgs/gamedemos.PNG)
+![](imgs/gamedemos.png)
 
 *Exemplos de jogos prontos*
 
 #### Modelos (*Templates*)
 
-![](imgs/templates.PNG)
+![](imgs/templates.png)
 
 *Modelos para jogos*
 
@@ -40,38 +40,38 @@ Você pode clicar no ícone do projeto ou em *"Open project"* para abrir um dess
 #### Criando uma nova conta
 Como usaremos a versão gratuita do Construct, é necessário que criem uma conta no site pois com uma conta e com o e-mail verificado algumas opções são desbloqueadas:
 
-![](imgs/vercaogratuita.PNG)
+![](imgs/vercaogratuita.png)
 
 *Funções disponíveis na versão gratuita **sem login***:
 
-![](imgs/vercaologin.PNG)
+![](imgs/vercaologin.png)
 
 *Funções disponíveis na versão gratuita **com login***
 
 Para criar uma nova conta vá em `guest` e então em `register`:
 
-![](imgs/register.PNG)
+![](imgs/register.png)
 *Menu para a criação da conta*
 
 Preencha o formulário com um **nome de usuário**, **e-mail** (algum que você tenha acesso fácil já que um e-mail será mandado para ele) e uma **senha**:
 
-![](imgs/criarconta.PNG)
+![](imgs/criarconta.png)
 
 *Formulário de criação de conta*
 
 Você receberá um e-mail de confirmação (caso não receba não esqueça de verificar a lixeira)
 
-![](imgs/emailconta.PNG)
+![](imgs/emailconta.png)
 
  *E-mail recebido*
 
 Abra o e-mail e clique no link de confirmação
 
-![](imgs/emailaberto.PNG)
+![](imgs/emailaberto.png)
 
 *Mensagem*
 
-![](imgs/contaverificada.PNG)
+![](imgs/contaverificada.png)
 *Conta verificada*
 
 Agora volte para o site do Construct 3 e faça login na conta que você criou
@@ -80,7 +80,7 @@ Agora volte para o site do Construct 3 e faça login na conta que você criou
 *Botão de login*
 
 
-![](imgs/loginfield.PNG)
+![](imgs/loginfield.png)
 *Campos de login*
 
 #### Criando um novo projeto
@@ -88,7 +88,7 @@ Agora volte para o site do Construct 3 e faça login na conta que você criou
 Clique no botão `NEW PROJECT` e coloque as configurações conforme as da imagem, então clique em `Create`
 
 
-![](imgs/newproject.PNG)
+![](imgs/newproject.png)
 
 * **Name**: "MyFirstPlatformer"
   * Pode ser o nome que você quiser, mas é melhor colocar algo que te ajude a encontrar o arquivo
@@ -107,7 +107,7 @@ Clique no botão `NEW PROJECT` e coloque as configurações conforme as da image
 
 Clique em `Create` e a ferramenta de edição será aberta
 
-![](imgs/toolscreen.PNG)
+![](imgs/toolscreen.png)
 
 
 
@@ -122,18 +122,18 @@ Nesse exemplo, será utilizado o Google Drive, mas os passos são muito semelhan
 
 Faça login em sua conta:
 
-![](imgs/savegooglelogin.PNG)
+![](imgs/savegooglelogin.png)
 
 
 
 Permita o acesso do Construct3:
 
-![](imgs/googleconfirmlogin.PNG)
+![](imgs/googleconfirmlogin.png)
 
 
 
 Use a ferramenta para criar uma nova pasta e salve o projeto nela:
-![](imgs/saveproject.PNG)
+![](imgs/saveproject.png)
 
 Se você preferir, pode baixar uma cópia do jogo a qualquer momento e guardá-la com você, vá no seguinte menu:
 
@@ -157,7 +157,7 @@ Na ferramenta, existem dois tipos de abas:
 * Layout
 * Event Sheet
 
-![](imgs/abas.PNG)
+![](imgs/abas.png)
 
 * Na aba **layout** é feito tudo relacionado a parte **gráfica** e **configurações** do jogo
 * Na aba **event sheet** é feito tudo relacionado a **programação** do jogo
@@ -169,7 +169,7 @@ Na ferramenta, existem dois tipos de abas:
 #### Área de Layout
 No layout você perceberá que existem dois retângulos, um retângulo brando e uma área pontilhada dentro dele
 
-![](imgs/basegame.PNG)
+![](imgs/basegame.png)
 
 O retângulo maior define a área onde seu jogo vai acontecer, essa área é chamada de **layout** ou **cena** do jogo, é importante concentrar seu jogo nela já que para deixar o jogo **mais rápido** e **economizar memória** é comum que se delete algum elemento do jogo que esteja **fora do layout**.
 
@@ -178,11 +178,11 @@ O retângulo menor com lados tracejados define onde a **câmera** do jogo começ
 
 #### Menu de Propriedades
 Conforme objetos forem adicionados, quando você clicar neles as propriedades serão exibidas nesta janela.
-![](imgs/proprie.PNG)
+![](imgs/proprie.png)
 
 #### Menu Projeto
 
-![](imgs/menuproject.PNG)
+![](imgs/menuproject.png)
 
 Nesse menu ficam todos os arquivos do jogo, inclusive os mostrados nas abas de **Layout** e **Event sheet**.
 
@@ -195,11 +195,11 @@ Caso as abas **Layout** ou **Event Sheet** desapareçam, use este menu para abri
 
 
 #### Tilemap
-![](imgs/tilemapmenu.PNG)
+![](imgs/tilemapmenu.png)
 Este menu é utilizado para facilitar a criação do visual do seu jogo, você verá isso em detalhes nos próximos tópicos.
 
 #### Layers
-![](imgs/layermenu.PNG)
+![](imgs/layermenu.png)
 O jogo pode ser dividido em camadas, esse menu é utilizado para gerencia-las, usando esse esquema você pode colocar objetos atrás ou na frente do cenário principal e ter um controle melhor disso, podendo deixar transparente todos os objetos que estão em uma determinada camada, por exemplo.
 
 
@@ -212,7 +212,7 @@ Vamos começar mudando o nome dessa camada, clique no nome dela para seleciona-l
 
 Vá no campo `name` e mude o valor dele de `layer 0` para `game` e aperte `enter` para confirmar:
 
-![](imgs/layernamechange.PNG)
+![](imgs/layernamechange.png)
 
 #### Dicas
 **Menus sumiram**
@@ -268,9 +268,9 @@ Vamos inserir um objeto que representa o **teclado**. Clique com o `botão direi
 
 Você verá a lista dos tipos de objeto:
 
-![](imgs/objectlist1.PNG)
-![](imgs/objectlist2.PNG)
-![](imgs/objectlist3.PNG)
+![](imgs/objectlist1.png)
+![](imgs/objectlist2.png)
+![](imgs/objectlist3.png)
 
 
 
@@ -305,7 +305,7 @@ Esse processo se repetirá para todos os objetos que adicionaremos ao jogo, algu
 ## *Background*
 
 Adicione um novo objeto do tipo `Tiled Backgound`
-![](imgs/addtiled.PNG)
+![](imgs/addtiled.png)
 
 Use a opção de pasta para selecionar o arquivo do computador.
 
@@ -313,7 +313,7 @@ Use a opção de pasta para selecionar o arquivo do computador.
 
 Vá até a pasta onde estão os planos de fundo e escolha o arquivo `Background/tiled_bg.png`:
 
-![](imgs/choosefilebg.PNG)
+![](imgs/choosefilebg.png)
 
 
 
@@ -323,7 +323,7 @@ Com o arquivo importado, aumente o tamanho do *tiled Background* para que ele pr
 
 As imagens de fundo são especialmente preparadas para que pareçam uma só quando colocamos várias delas lado a lado, funciona como um **mosaico**.
 
-![](imgs/02.PNG)
+![](imgs/02.png)
 
 
 
@@ -332,12 +332,12 @@ As imagens de fundo são especialmente preparadas para que pareçam uma só quan
 Adicione um novo objeto da mesma forma como você fez antes, mas dessa vez escolha o tipo `Tilemap`
 
 
-![](imgs/tilemapicon.PNG)
+![](imgs/tilemapicon.png)
 
 Abra o gerenciador de arquivos e selecione a imagem `Scenario/tilemap.png` ![](imgs/tilemap.png)
 Essa imagem possui vários blocos de 16 por 16 pixels que representam o **chão** do game
 
-![](imgs/03.PNG)
+![](imgs/03.png)
 
 
 
@@ -351,26 +351,26 @@ Mude a aba inferior de *Layers* para *Tilemap*, passando o mouse por cima dos de
 
 
 
-![](imgs/04.PNG)
+![](imgs/04.png)
 
 
 
 Agora você pode clicar em uma **célula** no menu *tilemap* e usar a ferramenta lápis para desenhar o cenário do seu jogo
 
-![](imgs/tilemapoptions.PNG)
+![](imgs/tilemapoptions.png)
 
-* ![](imgs/tilemapmouse.PNG) Use para voltar ao mouse normal;
-* ![](imgs/tilemappencil.PNG)Use para pintar o cenário;
-* ![](imgs/tilemaperase.PNG) Use para apagar algum erro;
-* ![](imgs/tilemapsquare.PNG)Use para pintar áreas maiores;
-* ![](imgs/tilemapflip.PNG) Use para espelhar a célula selecionada;
-* ![](imgs/tilemaprotate.PNG)Use para rodar a célula selecionada;
-
-
+* ![](imgs/tilemapmouse.png) Use para voltar ao mouse normal;
+* ![](imgs/tilemappencil.png)Use para pintar o cenário;
+* ![](imgs/tilemaperase.png) Use para apagar algum erro;
+* ![](imgs/tilemapsquare.png)Use para pintar áreas maiores;
+* ![](imgs/tilemapflip.png) Use para espelhar a célula selecionada;
+* ![](imgs/tilemaprotate.png)Use para rodar a célula selecionada;
 
 
 
-![](imgs/05.PNG)
+
+
+![](imgs/05.png)
 
 
 
@@ -378,32 +378,32 @@ Agora você pode clicar em uma **célula** no menu *tilemap* e usar a ferramenta
 
 Abra a janela de criação de objetos e escolha um do tipo `Sprite`
 
-![](imgs/10.PNG)
+![](imgs/10.png)
 
 Abra o gerenciador de arquivos e escolha a imagem `Player\Decomposed\Idle\tile000.png` (![](imgs/tile000.png)). Na pasta você verá que existem outros arquivos para fazer a animação de quando o personagem está parado, faremos a animação mais adiante.
 
-![](imgs/11.PNG)
+![](imgs/11.png)
 
 Clique na tela para adicioná-lo
 Se você apertar o botão de executar verá que o jogador está flutuando
-![](imgs/execute.PNG)
-![](imgs/test1.PNG)
+![](imgs/execute.png)
+![](imgs/test1.png)
 
 Isso acontece pois esse é um objeto do tipo ***Sprite***, que não tem um comportamento definido, precisamos dar a ele o comportamento de **plataforma**
 
 ![](imgs/12.png) 
-![](imgs/13.PNG)
+![](imgs/13.png)
 
 Se você apertar o botão para executar agora verá que o player irá atravessar o chão e cair para o infinito, isso acontece já que precisamos dar ao **chão** algum **comportamento** que permita a interação com o jogador
 
-![](imgs/10-2.PNG)
+![](imgs/10-2.png)
 Use o menu lateral para selecionar o *Tilemap* e entre no menu *Add behavior*, antes disso, aproveite para renomear os objetos para o que eles irão representar no jogo
 
-![](imgs/06.PNG)
+![](imgs/06.png)
 
 Aplique o comportamento `Solid`
 
-![](imgs/07.PNG)
+![](imgs/07.png)
 
 Agora o jogador e o cenário podem interagir um com o outro, mas você perceberá que existem vários problemas
 
@@ -411,7 +411,7 @@ Agora o jogador e o cenário podem interagir um com o outro, mas você perceber�
 * O jogador está muito rápido e pula muito alto (até sai da tela)
 * Não existe animação de andar, pular ou olha para o lado certo
 
-![](imgs/floating.PNG)
+![](imgs/floating.png)
 
 Vamos resolver esses problemas
 
@@ -420,23 +420,23 @@ Vamos resolver esses problemas
 Para determinar se um objeto está encostando em outro usamos um conceito chamado ***Box collision*** ou ***Collision Polygon***, como seria muito complexo para o computador usar as imagens que colocamos para determinar se dois objetos estão se tocando, ele desenha um polígono em cima desses desenhos para simplificar esse teste
 No caso do chão, o construct colocou um **quadrado** como polígono, sendo que algumas formas são **triangulares**
 Procure os ***tiles*** que não completam o quadrado completamente e dê um clique duplo em um deles
-![](imgs/tileeditor.PNG)
+![](imgs/tileeditor.png)
 
 Clique no ícone da ferramenta de editar o polígono de colisão
 
-![](imgs/08.PNG)
+![](imgs/08.png)
 Você pode **arrastar os quadrados vermelhos** para mudar a forma do polígono. Dê um duplo clique em um deles para gerar mais um e clique uma vez e aperte `Delete` ou `Backspace` para removê-lo
 
 Faça esse processo para todos os *tiles* que não forem quadrados completos.
 Precisamos repetir o mesmo processo para o *sprite* do jogador
 
-![](imgs/playercolision.PNG)
-![](imgs/playercolision2.PNG)
+![](imgs/playercolision.png)
+![](imgs/playercolision2.png)
 
 Agora se você executar o jogo vai ver que a interação entre o personagem e o mapa está muito melhor
 ### Mudando as propriedades do *Player*
 
-![](imgs/props.PNG)
+![](imgs/props.png)
 
 Aqui estão alguns valores recomendados, você pode escolher os que quiser para seu jogo, mas é importante escolher com sabedoria já que você pode precisar reconstruir o cenário todo caso mude a forma como o jogador se move.
 
@@ -448,28 +448,28 @@ Dê um clique duplo no personagem. Note que há uma barra lateral indicando quai
 
 Vamos começar com a animação de quando o jogador está parado, mude o nome da única animação existente para `idle`
 
-![](imgs/15.PNG)
+![](imgs/15.png)
 
 Na área dos frames escolha a opção `Import Frames > From Files` para dizer que iremos importar os frames da animação cada um de um arquivo
 
-![](imgs/16.PNG)
+![](imgs/16.png)
 
 Selecione os arquivos em `Tiles\Player\Decomposed\Idle` e delete o quadro de número zero já que ele é o que estava anteriormente
 
 Você pode usar a opção `Preview` para ver como a animação está
 
-![](imgs/17.PNG)
+![](imgs/17.png)
 
 Como você pode ver, a animação acontece apenas uma vez e está muito lenta, vamos alterar isso.
-![](imgs/18.PNG)
+![](imgs/18.png)
 
 Com a animação `Idle` selecionada, vamos definir a velocidade como `8` frames por segundo e vamos marcar a opção de loop
 
-![](imgs/19.PNG)
+![](imgs/19.png)
 
 O mesmo processo deve ser aplicado para as animações
 
-![](imgs/animationlist.PNG)
+![](imgs/animationlist.png)
 
 * Idle
   * Speed: 8
@@ -497,10 +497,10 @@ Segurando a tecla `ctrl` clique nos dois quadrados vermelhos acima do personagem
 
 
 
-![](imgs/lowpers.PNG)
+![](imgs/lowpers.png)
 Repita o processo para os outros lados desta forma:
 
-![](imgs/editing.PNG)
+![](imgs/editing.png)
 Agora clique no personagem com o botão esquerdo do mouse e escolha a opção `Apply to all animations`
 
 ![](imgs/applytoall.png)
@@ -525,7 +525,7 @@ Agora aplique essa mudança para todas as animações
 
 Vamos colocar um efeito de poeira quando o jogador cair no chão, para começar, adicione um novo objeto do tipo *Particles*
 
-![](imgs/addparticles.PNG)
+![](imgs/addparticles.png)
 
 Clique na tela para adicionar o objeto, na janela que irá abrir selecione o arquivo `Particles/playerdust.png`
 
@@ -552,7 +552,7 @@ Nesta aba é onde ficará o código que definirá os **comportamentos do jogo** 
 
 Um evento é uma **condição** ligada a um ou mais **objetos** do jogo, por exemplo: no game, o teclado será representado por um **objeto** do tipo **Keyboard**, pois são os **objetos** que podem lançar **eventos**, assim, podemos no código monitorar por algum **evento específico**, nesse caso, pode ser quando alguma tecla for pressionada ou solta, então podemos executar alguma ação quando esse evento ocorrer.
 
-![](imgs/eventsheetexample.PNG)
+![](imgs/eventsheetexample.png)
 
 
 
@@ -578,13 +578,13 @@ Alguns eventos comuns são:
 
 Você pode criar um evento clicando em `Add event`
 
-![](imgs/addevent.PNG)
+![](imgs/addevent.png)
 
 
 
 Será te perguntado a **condição**, ela tem que estar relacionada a um dos **objetos** do jogo
 
-![](imgs/addcondition.PNG)
+![](imgs/addcondition.png)
 
 
 
@@ -601,13 +601,13 @@ Existem dois tipos de eventos
   * As **ações** são executadas na **primeira vez** que a ação for verdadeira, ou seja, apenas **no instante** que o evento ocorrer
   * Se a ação for fazer o personagem pular, ele irá pular **uma vez** e só pulará novamente se você soltar a tecla e apertá-la novamente
 
-![](imgs/keydownkeypress.PNG)
+![](imgs/keydownkeypress.png)
 
-![](imgs/onkeypress.PNG)
+![](imgs/onkeypress.png)
 
-![](imgs/addaction.PNG)
+![](imgs/addaction.png)
 
-![](imgs/systemaction.PNG)
+![](imgs/systemaction.png)
 
 
 
@@ -627,7 +627,7 @@ Outra forma de fazer isso
 
 
 
-![](imgs/addanothercondition.PNG)
+![](imgs/addanothercondition.png)
 
 
 
@@ -679,7 +679,7 @@ Caso você queira que o bloco **seja executado** quando uma condição **não** 
 
 Um bloco com um invert fica assim:
 
-![](imgs/invertblock.PNG)
+![](imgs/invertblock.png)
 
 
 
@@ -709,7 +709,7 @@ O resultado será:
 
 
 
-![](imgs/elseblock.PNG)
+![](imgs/elseblock.png)
 
 
 
@@ -887,7 +887,7 @@ Crie um novo evento partindo do objeto teclado e escolha o evento `On key presse
 
 ### Como o Construct executa a *event sheet*?
 
-![](imgs/eventsheetexample.PNG)
+![](imgs/eventsheetexample.png)
 
 É preciso lembrar que, no Construct, todas as ações programadas precisam ser precedidas por um evento, pode-se dizer que, quando algo acontece no jogo um evento é disparado no código e ações são tomadas.
 
@@ -986,7 +986,7 @@ $$
 
 Uma forma mais simples de fazer a câmera (mas não tão boa):
 
-![](imgs/outracamera.PNG)
+![](imgs/outracamera.png)
 
 
 
@@ -1004,7 +1004,7 @@ Vamos adicionar três sprites ao jogo, eles deverão receber como imagem
 
 Vamos renomeá-los da seguinte forma:
 
-![](imgs/newNames.PNG)
+![](imgs/newNames.png)
 
 Vamos aplicar aos três o *Behavior* de `Jump Tru` que fará com que o personagem possa ficar em cima deles, mas que ao pular por baixo os atravesse.
 
@@ -1430,11 +1430,11 @@ Vá nas propriedades dele e coloque o seguinte:
 
 
 
-![](imgs/editfire2.PNG)
+![](imgs/editfire2.png)
 
-![](imgs/editfire3.PNG)
+![](imgs/editfire3.png)
 
-![](imgs/editfire4.PNG)
+![](imgs/editfire4.png)
 
 Apenas a imagem da tocha deve ser mostrada no jogo, as outras **devem estar no layout** mas **fora** da área que o usuário pode ver.
 
@@ -1504,7 +1504,7 @@ O programa deverá ser o seguinte:
 
 
 
-![](imgs/block3.PNG)
+![](imgs/block3.png)
 
 
 
@@ -1676,7 +1676,7 @@ Dessa forma o inimigo patrulhará entre as duas cercas. Se você quiser poupar a
 
 
 
-![](imgs/changedirection2.PNG)
+![](imgs/changedirection2.png)
 
 Na fórmula `(Enemy.Direction + 1) % 2`  estamos usando algo chamado **operação modular** não é fundamental que você a compreenda mas saiba que ela causa o mesmo resultado que a operação anterior.
 
@@ -1716,7 +1716,7 @@ Vamos adicionar a barra de vida, você deve mudar de camada e selecionar a `UI`,
 
 
 
-![](imgs/uiselected.PNG)
+![](imgs/uiselected.png)
 
 
 
@@ -1735,7 +1735,7 @@ Redimensione o resultado para apenas três corações aparecerem em cada imagem 
 
 ![](imgs/hearthoverlay1.png)
 
-![](imgs/hearthoverlay2.PNG)
+![](imgs/hearthoverlay2.png)
 
 
 
