@@ -17,7 +17,14 @@
 ## Material
 
 ### Arquivos
-* [Arte utilizada na apostila](files/download/SuperEngineArt.rar)
+* [Super Arcade (Arte utilizada na apostila)](files/download/Super Arcade Texture.zip)
+* [Kiwi Texture](files/download/Kiwi Texture.zip)
+* [Minecraft Texture](files/download/Minecraft Texture.zip)
+* [Morenie Small Texture](files/download/Morenie Small Texture.zip)
+* [Morenie Texture](files/download/Morenie Texture.zip)
+* [Sunny Land](files/download/Sunny Land.zip)
+
+
 
 ### Dicas
 * [Dicas](files/aulas/dicas.html)
@@ -74,8 +81,10 @@
 * [soundjay.com](https://www.soundjay.com)
 
 
-
 #### Jogos de Exemplo
+
+* [Jogo que desenvolveremos](files\game\Arcade\index.html)
+
 
 * [https://td2tl.com/scirra-store/spe12/](https://td2tl.com/scirra-store/spe12/)
   ​
