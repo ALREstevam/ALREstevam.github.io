@@ -2,6 +2,7 @@
 
 ## Aulas
 
+* [Apresentação Cotil](files/pdf/apresentacao_do_cotil.pdf)
 * [Aula 1](files/aulas/aula1.html)
 * [Aula 2](files/aulas/aula2.html)
 * [Aula 3](files/aulas/aula3.html)
