@@ -87,3 +87,9 @@
 		button{
 
 		}
+
+		.bgline{
+			background: whitesmoke;
+			padding: 10px;
+			color: #372322;
+		}
