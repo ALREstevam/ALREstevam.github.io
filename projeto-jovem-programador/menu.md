@@ -1,20 +1,24 @@
 # Projeto Jovem programador
 
+![](webimages/projeto-jp.png)
+
+
+
 ## Aulas
 
-* [Apresentação Cotil](files/pdf/apresentacao_do_cotil.pdf)
-* [Aula 1](files/aulas/aula1.html)
+* [**Aula 1**](files/aulas/aula1.html)
+  * [Apresentação Cotil](files/pdf/apresentacao_do_cotil.pdf)
   * [Arquivo: Aula1.c3p](files\projects\Aula1.c3p)
-* [Aula 2](files/aulas/aula2.html)
+* [**Aula 2**](files/aulas/aula2.html)
   * [Arquivo: projeto no fim da aula 2](files\projects\Aula2_arq1.c3p)
   * [Arquivo: projeto no fim da aula 2 (2)](files\projects\Aula2_arq1.c3p)
-* [Aula 3](files/aulas/aula3.html)
-* [Aula 4](files/aulas/aula4.html)
-* [Aula 5](files/aulas/aula5.html)
-* [Aula 6](files/aulas/aula6.html)
+* [**Aula 3**](files/aulas/aula3.html)
+* [**Aula 4**](files/aulas/aula4.html)
+* [**Aula 5**](files/aulas/aula5.html)
+* [**Aula 6**](files/aulas/aula6.html)
 
 
-### Assuntos adicionais
+###  Assuntos adicionais
 
 * [1. Plataformas e Plataformas móveis](files/aulas/adicional_plataformas.html)
 * [2. Mostrando moedas coletadas na interface](files/aulas/adicional_interface_1.html)
@@ -22,12 +26,12 @@
 
 
 ### Funcionamento do Construct  
-* [Parte Teórica](files/teoria/teorico.htm)
+* [Parte Teórica](files/aulas/teorico.html)
 
 ## Material
 
 ### Arquivos
-* [Super Arcade (Arte utilizada na apostila)](files/download/Super Arcade Texture.zip)
+* [**Super Arcade (Arte utilizada na apostila)**](files/download/Super Arcade Texture.zip)
 * [Kiwi Texture](files/download/Kiwi Texture.zip)
 * [Minecraft Texture](files/download/Minecraft Texture.zip)
 * [Morenie Small Texture](files/download/Morenie Small Texture.zip)
