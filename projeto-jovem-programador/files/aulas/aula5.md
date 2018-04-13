@@ -24,11 +24,19 @@ O nome da variável será `hitpoints` e receberá um número representando a qua
 
 
 
-Vamos adicionar a barra de vida, você deve mudar de camada e selecionar a `UI`, ao clicar no nome dela tudo que for adicionado será nessa camada.
+Vamos criar uma nova camada para receber essa barra. Faça da seguinte forma:
+
+![1523581478528](assets/1523581478528.png)
 
 
 
-![](imgs/uiselected.png)
+
+
+![1523581541158](assets/1523581541158.png)
+
+Vamos adicionar a barra de vida, você deve garantir que a camada `GUI` está selecionada, ao clicar no nome dela tudo que for adicionado será nesta camada.
+
+
 
 
 
@@ -113,13 +121,11 @@ Crie um novo objeto do tipo `Sprite` com o nome `Life` e com uma animação com 
 
 
 
-![52140321186](C:\Users\andre\Documents\GitHub\Projeto---Construct3---Programa--o-de-jogos-nas-escolas\apostilas\imgs\1521403211869.png)
+![52140321186](imgs\1521403211869.png)
 
 
 
 
-
-![52140323512]()
 
 # Projéteis
 
@@ -337,6 +343,4 @@ Já programamos a morte do inimigo pelo jogador, precisamos fazer o inverso agor
 ![52140266713](imgs\1521402667139.png)
 
 
-
-# Atividade para próxima aula -  escolha dos sons do jogo
 

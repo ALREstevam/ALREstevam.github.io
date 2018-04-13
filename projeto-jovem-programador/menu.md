@@ -14,9 +14,15 @@
 * [Aula 6](files/aulas/aula6.html)
 
 
+### Assuntos adicionais
 
-### Funcionamento do Construct  ​
-* [Parte Teórica]()
+* [1. Plataformas e Plataformas móveis](files/aulas/adicional_plataformas.html)
+* [2. Mostrando moedas coletadas na interface](files/aulas/adicional_interface_1.html)
+* [3. Sons, músicas e efeitos](files/aulas/adicional_sons.html)
+
+
+### Funcionamento do Construct  
+* [Parte Teórica](files/teoria/teorico.htm)
 
 ## Material
 

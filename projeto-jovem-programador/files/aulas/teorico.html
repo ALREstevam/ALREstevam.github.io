@@ -1,0 +1,309 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>teorico.md</title><link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}#write, body { height: auto; }
+#write, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write ol, #write p, #write ul { position: relative; }
+#write, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write, pre { white-space: pre-wrap; }
+.CodeMirror, .md-fences, table { text-align: left; }
+.md-reset, a:active, a:hover { outline: 0px; }
+.md-reset, .md-toc-item a { text-decoration: none; }
+.MathJax_SVG, .md-reset { float: none; direction: ltr; }
+:root { --bg-color:#ffffff; --text-color:#333333; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+.in-text-selection, ::selection { background: rgb(181, 214, 252); text-shadow: none; }
+#write { margin: 0px auto; word-break: normal; word-wrap: break-word; padding-bottom: 70px; overflow-x: visible; }
+.first-line-indent #write p .md-line { text-indent: 0px; }
+.first-line-indent #write li, .first-line-indent #write p, .first-line-indent #write p .md-line:first-child { text-indent: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write > blockquote:first-child, #write > div:first-child, #write > ol:first-child, #write > p:first-child, #write > pre:first-child, #write > table:first-child, #write > ul:first-child { margin-top: 30px; }
+#write li > table:first-child { margin-top: -20px; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+p { -webkit-margin-before: 1rem; -webkit-margin-after: 1rem; -webkit-margin-start: 0px; -webkit-margin-end: 0px; }
+.mathjax-block { margin-top: 0px; margin-bottom: 0px; -webkit-margin-before: 0px; -webkit-margin-after: 0px; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+#write > figure:first-child { margin-top: 16px; }
+figure { overflow-x: auto; margin: -8px 0px 0px -8px; max-width: calc(100% + 16px); padding: 8px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; }
+.CodeMirror-line, .md-fences { break-inside: avoid; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; margin-right: 4px; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+.md-fences { font-size: 0.9rem; display: block; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+.md-fences .CodeMirror.CodeMirror-wrap { top: -1.6em; margin-bottom: -1.6em; }
+.md-fences.mock-cm { white-space: pre-wrap; }
+.show-fences-line-number .md-fences { padding-left: 0px; }
+.show-fences-line-number .md-fences.mock-cm { padding-left: 40px; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; vertical-align: top; background: 0px 0px; text-shadow: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; }
+.md-toc-inner, a img, img a { cursor: pointer; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: nowrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid-page; orphans: 2; }
+  p { orphans: 4; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > img:only-child { display: block; margin: auto; }
+.md-line > .md-image:only-child, p > .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+.mathjax-block:not(:empty)::after, .md-toc-content::after, .md-toc::after { display: none; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.mathjax-block { white-space: pre; overflow: hidden; width: 100%; }
+p + .mathjax-block { margin-top: -1.143rem; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.MathJax_SVG, .mathjax-block .MathJax_SVG_Display { text-indent: 0px; max-width: none; max-height: none; min-height: 0px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-inner:hover { }
+.md-toc-inner { display: inline-block; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, tt { font-family: var(--monospace); }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; }
+a.md-print-anchor { border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.mathjax-block .MathJax_SVG_Display { text-align: center; margin: 1em 0px; position: relative; min-width: 100%; width: auto; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: monospace; }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; min-width: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg, [lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+
+
+.CodeMirror, .CodeMirror-sizer { position: relative; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.fences-no-line-wrapping .md-fences .CodeMirror { margin-top: -30px; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; }
+.CodeMirror-lines { padding: 4px 0px; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-scroll, .cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta, .cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error, .cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.CodeMirror { height: auto; overflow: hidden; }
+.CodeMirror-scroll { margin-bottom: -30px; padding-bottom: 30px; height: 100%; outline: 0px; position: relative; box-sizing: content-box; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow-x: hidden; overflow-y: scroll; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow-y: hidden; overflow-x: scroll; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; border-right: none; width: 0px; visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.CodeMirror-selected { background: rgb(217, 217, 217); }
+.CodeMirror-focused .CodeMirror-selected { background: rgb(215, 212, 240); }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+.CodeMirror-lint-markers { width: 16px; }
+.CodeMirror-lint-tooltip { background-color: infobackground; border: 1px solid rgb(0, 0, 0); border-radius: 4px; color: infotext; font-family: var(--monospace); overflow: hidden; padding: 2px 5px; position: fixed; white-space: pre-wrap; z-index: 10000; max-width: 600px; opacity: 0; transition: opacity 0.4s; font-size: 0.8em; }
+.CodeMirror-lint-mark-error, .CodeMirror-lint-mark-warning { background-position: left bottom; background-repeat: repeat-x; }
+.CodeMirror-lint-mark-error { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sJDw4cOCW1/KIAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAHElEQVQI12NggIL/DAz/GdA5/xkY/qPKMDAwAADLZwf5rvm+LQAAAABJRU5ErkJggg=="); }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-marker-warning { background-position: center center; background-repeat: no-repeat; cursor: pointer; display: inline-block; height: 16px; width: 16px; vertical-align: middle; position: relative; }
+.CodeMirror-lint-message-error, .CodeMirror-lint-message-warning { padding-left: 18px; background-position: left top; background-repeat: no-repeat; }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-message-error { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAHlBMVEW7AAC7AACxAAC7AAC7AAAAAAC4AAC5AAD///+7AAAUdclpAAAABnRSTlMXnORSiwCK0ZKSAAAATUlEQVR42mWPOQ7AQAgDuQLx/z8csYRmPRIFIwRGnosRrpamvkKi0FTIiMASR3hhKW+hAN6/tIWhu9PDWiTGNEkTtIOucA5Oyr9ckPgAWm0GPBog6v4AAAAASUVORK5CYII="); }
+.CodeMirror-lint-marker-warning, .CodeMirror-lint-message-warning { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAANlBMVEX/uwDvrwD/uwD/uwD/uwD/uwD/uwD/uwD/uwD6twD/uwAAAADurwD2tQD7uAD+ugAAAAD/uwDhmeTRAAAADHRSTlMJ8mN1EYcbmiixgACm7WbuAAAAVklEQVR42n3PUQqAIBBFUU1LLc3u/jdbOJoW1P08DA9Gba8+YWJ6gNJoNYIBzAA2chBth5kLmG9YUoG0NHAUwFXwO9LuBQL1giCQb8gC9Oro2vp5rncCIY8L8uEx5ZkAAAAASUVORK5CYII="); }
+.CodeMirror-lint-marker-multiple { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAMAAADzjKfhAAAACVBMVEUAAAAAAAC/v7914kyHAAAAAXRSTlMAQObYZgAAACNJREFUeNo1ioEJAAAIwmz/H90iFFSGJgFMe3gaLZ0od+9/AQZ0ADosbYraAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-position: right bottom; width: 100%; height: 100%; }
+
+
+:root { --side-bar-bg-color: #fafafa; --control-text-color: #777; }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: normal; src: local("Open Sans Regular"), url("./github/400.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: normal; src: local("Open Sans Italic"), url("./github/400i.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: bold; src: local("Open Sans Bold"), url("./github/700.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: bold; src: local("Open Sans Bold Italic"), url("./github/700i.woff") format("woff"); }
+html { font-size: 16px; }
+body { font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color: rgb(51, 51, 51); line-height: 1.6; }
+#write { max-width: 860px; margin: 0px auto; padding: 20px 30px 100px; }
+#write > ul:first-child, #write > ol:first-child { margin-top: 30px; }
+body > :first-child { margin-top: 0px !important; }
+body > :last-child { margin-bottom: 0px !important; }
+a { color: rgb(65, 131, 196); }
+h1, h2, h3, h4, h5, h6 { position: relative; margin-top: 1rem; margin-bottom: 1rem; font-weight: bold; line-height: 1.4; cursor: text; }
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor { text-decoration: none; }
+h1 tt, h1 code { font-size: inherit; }
+h2 tt, h2 code { font-size: inherit; }
+h3 tt, h3 code { font-size: inherit; }
+h4 tt, h4 code { font-size: inherit; }
+h5 tt, h5 code { font-size: inherit; }
+h6 tt, h6 code { font-size: inherit; }
+h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
+h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
+h3 { font-size: 1.5em; line-height: 1.43; }
+h4 { font-size: 1.25em; }
+h5 { font-size: 1em; }
+h6 { font-size: 1em; color: rgb(119, 119, 119); }
+p, blockquote, ul, ol, dl, table { margin: 0.8em 0px; }
+li > ol, li > ul { margin: 0px; }
+hr { height: 4px; padding: 0px; margin: 16px 0px; background-color: rgb(231, 231, 231); border-width: 0px 0px 1px; border-style: none none solid; border-top-color: initial; border-right-color: initial; border-left-color: initial; border-image: initial; overflow: hidden; box-sizing: content-box; border-bottom-color: rgb(221, 221, 221); }
+body > h2:first-child { margin-top: 0px; padding-top: 0px; }
+body > h1:first-child { margin-top: 0px; padding-top: 0px; }
+body > h1:first-child + h2 { margin-top: 0px; padding-top: 0px; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child { margin-top: 0px; padding-top: 0px; }
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 { margin-top: 0px; padding-top: 0px; }
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p { margin-top: 0px; }
+li p.first { display: inline-block; }
+ul, ol { padding-left: 30px; }
+ul:first-child, ol:first-child { margin-top: 0px; }
+ul:last-child, ol:last-child { margin-bottom: 0px; }
+blockquote { border-left: 4px solid rgb(221, 221, 221); padding: 0px 15px; color: rgb(119, 119, 119); }
+blockquote blockquote { padding-right: 0px; }
+table { padding: 0px; word-break: initial; }
+table tr { border-top: 1px solid rgb(204, 204, 204); margin: 0px; padding: 0px; }
+table tr:nth-child(2n) { background-color: rgb(248, 248, 248); }
+table tr th { font-weight: bold; border-width: 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-left-style: solid; border-top-color: rgb(204, 204, 204); border-right-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-image: initial; border-bottom-style: initial; border-bottom-color: initial; text-align: left; margin: 0px; padding: 6px 13px; }
+table tr td { border: 1px solid rgb(204, 204, 204); text-align: left; margin: 0px; padding: 6px 13px; }
+table tr th:first-child, table tr td:first-child { margin-top: 0px; }
+table tr th:last-child, table tr td:last-child { margin-bottom: 0px; }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); }
+.md-fences, code, tt { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); border-radius: 3px; font-family: Consolas, "Liberation Mono", Courier, monospace; padding: 2px 4px 0px; font-size: 0.9em; }
+.md-fences { margin-bottom: 15px; margin-top: 15px; padding: 8px 1em 6px; }
+.md-task-list-item > input { margin-left: -1.3em; }
+@media screen and (min-width: 914px) {
+}
+@media print {
+  html { font-size: 13px; }
+  table, pre { break-inside: avoid; }
+  pre { word-wrap: break-word; }
+}
+.md-fences { background-color: rgb(248, 248, 248); }
+#write pre.md-meta-block { padding: 1rem; font-size: 85%; line-height: 1.45; background-color: rgb(247, 247, 247); border: 0px; border-radius: 3px; color: rgb(119, 119, 119); margin-top: 0px !important; }
+.mathjax-block > .code-tooltip { bottom: 0.375rem; }
+#write > h3.md-focus::before { left: -1.5625rem; top: 0.375rem; }
+#write > h4.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h5.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h6.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+.md-image > .md-meta { border-radius: 3px; font-family: Consolas, "Liberation Mono", Courier, monospace; padding: 2px 0px 0px 4px; font-size: 0.9em; color: inherit; }
+.md-tag { color: inherit; }
+.md-toc { margin-top: 20px; padding-bottom: 20px; }
+.sidebar-tabs { border-bottom: none; }
+#typora-quick-open { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); }
+#typora-quick-open-item { background-color: rgb(250, 250, 250); border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238); border-style: solid; border-width: 1px; }
+#md-notification::before { top: 10px; }
+.on-focus-mode blockquote { border-left-color: rgba(85, 85, 85, 0.12); }
+header, .context-menu, .megamenu-content, footer { font-family: "Segoe UI", Arial, sans-serif; }
+.file-node-content:hover .file-node-icon, .file-node-content:hover .file-node-open-state { visibility: visible; }
+.mac-seamless-mode #typora-sidebar { background-color: var(--side-bar-bg-color); }
+.md-lang { color: rgb(180, 101, 77); }
+.html-for-mac .context-menu { --item-hover-bg-color: #E6F0FE; }
+
+
+
+
+
+ .typora-export p {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = 'is-node'><h1><a name='header-n0' class='md-header-anchor '></a>Programação de Jogos com o Construct -  Parte Teórica</h1><div class='md-toc' mdtype='toc'><p class="md-toc-content"><span class="md-toc-item md-toc-h1" data-ref="n0"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n0">Programação de Jogos com o Construct -  Parte Teórica</a></span><span class="md-toc-item md-toc-h2" data-ref="n82"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n82">Introdução</a></span><span class="md-toc-item md-toc-h3" data-ref="n3"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n3">O que é programação?</a></span><span class="md-toc-item md-toc-h3" data-ref="n39"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n39">O que é programação de jogos?</a></span><span class="md-toc-item md-toc-h3" data-ref="n55"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n55">O que é o Construct3?</a></span><span class="md-toc-item md-toc-h2" data-ref="n101"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n101">Tipos de Objetos</a></span><span class="md-toc-item md-toc-h3" data-ref="n104"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n104">Visual x Lógico</a></span><span class="md-toc-item md-toc-h3" data-ref="n165"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n165">Tipos de Objeto (<em>Object Type</em>)</a></span><span class="md-toc-item md-toc-h3" data-ref="n514"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n514">Tipos de Objeto e Instâncias</a></span><span class="md-toc-item md-toc-h2" data-ref="n1303"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n1303">Variáveis</a></span><span class="md-toc-item md-toc-h3" data-ref="n1309"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n1309">O que é uma variável?</a></span><span class="md-toc-item md-toc-h3" data-ref="n1369"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n1369">Variável de instância</a></span><span class="md-toc-item md-toc-h3" data-ref="n1626"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n1626">Variáveis Globais</a></span><span class="md-toc-item md-toc-h2" data-ref="n2098"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n2098">Acessando variáveis e executando funções</a></span><span class="md-toc-item md-toc-h2" data-ref="n2091"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n2091">Blocos de eventos</a></span><span class="md-toc-item md-toc-h3" data-ref="n1641"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n1641">O que é um evento?</a></span><span class="md-toc-item md-toc-h3" data-ref="n2069"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n2069">Tipos de eventos</a></span><span class="md-toc-item md-toc-h3" data-ref="n1923"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n1923">Juntando eventos</a></span><span class="md-toc-item md-toc-h4" data-ref="n1924"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n1924">Evento do tipo <em>AND</em> / E</a></span><span class="md-toc-item md-toc-h4" data-ref="n1949"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n1949">Evento do tipo <em>OR</em> / <em>OU</em></a></span><span class="md-toc-item md-toc-h4" data-ref="n1978"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n1978">Invert</a></span><span class="md-toc-item md-toc-h4" data-ref="n2003"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n2003"><em>Else</em> (Senão)</a></span><span class="md-toc-item md-toc-h4" data-ref="n2030"><a class="md-toc-inner" style="cursor: pointer;" href="#header-n2030">Subeventos</a></span></p></div><h2><a name='header-n82' class='md-header-anchor '></a>Introdução</h2><h3><a name='header-n3' class='md-header-anchor '></a>O que é programação?</h3><p>Programação é o uso de uma <strong>linguagem</strong> que o computador possa <strong>compreender</strong> de forma a resolver problemas.</p><p>Um programa é uma <strong>série de passos</strong> ou <strong>instruções</strong> que devem ser executados pelo computador.</p><p>&nbsp;</p><p><strong>O que pode ser feito com programação?</strong></p><ul><li>Criar jogos</li><li>Criar programas para sistemas operacionais</li><li>Criar sistemas operacionais</li><li>Criar programas para fazer suas tarefas no dia-a-dia para facilitar seu trabalho</li><li>Consertar problemas em sistemas operacionais/programas</li><li>Invadir redes, sistemas, sites e computadores pessoais (hackear)</li><li>Adicionar funcionalidades que você desejar em sistemas operacionais/programas</li><li>Muitas outras coisas</li></ul><p><a href='https://www.programacaoprogressiva.net/2012/08/serie-comece-programar-2-o-que-e.html' target='_blank' >https://www.programacaoprogressiva.net/2012/08/serie-comece-programar-2-o-que-e.html</a></p><h3><a name='header-n39' class='md-header-anchor '></a>O que é programação de jogos?</h3><p>A programação de jogos é uma sub-área da programação que lida com a criação de <strong>jogos eletrônicos</strong>. Para fazer um jogo você precisa pensar em coisas como:</p><ul><li><strong>Uma ideia inicial</strong>: <em>&quot;meu jogo é um jogo de...&quot;</em></li><li><strong>Uma história</strong>: <em>&quot;No meu jogo vai acontecer isso, depois isso e então aquilo...&quot;</em></li><li><strong>Uma linguagem de programação</strong>: usando uma linguagem de programação você pode <strong>dizer</strong> ao computador qual <strong>operação</strong> você quer que ele faça, mas assim como você pode dizer a mesma coisa em diferentes <strong>línguas</strong>, só que de forma diferente, na programação acontece o mesmo, você pode dizer  quais passos o computador deve seguir usando as <strong>regras</strong> de uma linguagem de programação.</li><li><strong>Imagens, sons e músicas</strong>: como jogos são visuais, você precisará procurar, comprar ou fazer a parte audiovisual que irá utilizar</li></ul><h3><a name='header-n55' class='md-header-anchor '></a>O que é o Construct3?</h3><ul><li>O <strong>Construct 3</strong> é uma ferramenta para a criação de jogos <strong>2D</strong> voltada para pessoas que <strong>não conhecem programação</strong></li><li>A versão 3 do Construct é baseada na plataforma web, ou seja, <strong>nada precisa ser baixado ou instalado no computador</strong>, o acesso pode ser feito por um <em>browser</em> atualizado como Google Chome, Mozila Firefox, Opera, Safari etc.;</li><li>Foi desenvolvido pela empresa <strong>Scirra Ltda</strong> e foi lançado em 2007;</li><li>No Construct entender a <strong>lógica</strong> de como um jogo funciona é <strong>mais importante</strong> do que saber alguma linguagem de programação já que o código do jogo é feito de forma <strong>visual</strong> por meio de <strong>blocos</strong>;</li></ul><p>&nbsp;</p><h2><a name='header-n101' class='md-header-anchor '></a>Tipos de Objetos</h2><h3><a name='header-n104' class='md-header-anchor '></a>Visual x Lógico</h3><p>No Construct, a construção do jogo é <strong>dividida em duas partes</strong></p><p>Uma parte <strong>visual</strong> e uma parte <strong>lógica</strong></p><p>Essas partes podem ser acessadas por essas duas abas:</p><p><img src='assets/1523556560757.png' alt='1523556560757' /></p><p>Chamamos a parte visual de <strong><em>Layout</em></strong> e a parte lógica de <strong><em>Event sheet</em></strong></p><p>&nbsp;</p><h3><a name='header-n165' class='md-header-anchor '></a>Tipos de Objeto (<em>Object Type</em>)</h3><p><img src='assets/objectlist1.png' alt='img' /></p><p><img src='assets/objectlist2.png' alt='img' /></p><p>Todo jogo é feito pela <strong>manipulação</strong> de <strong>instâncias</strong> e <strong>tipos de objeto</strong></p><p>&nbsp;</p><p>Todo <strong>tipo de objeto</strong> é algo do jogo que tem:</p><ul><li>Comportamentos já definidos</li><li>Comportamentos que pode vir a ter</li><li>Efeitos que podem ser aplicados</li><li>Informações que podem ser manipuladas</li><li>Coisas que podem ser testadas</li></ul><p>&nbsp;</p><p><strong>Exemplos</strong>:</p><ul><li><p>Um objeto do tipo <strong><em>Sprite</em></strong>:</p><ul><li>Tem o comportamento <strong>padrão</strong> de poder receber <strong>animações</strong>, podemos manipular qual animação deve ser tocada, por exemplo</li><li>Podemos aumentar esse comportamento adicionando coisas como: ser um personagem, ser afetado pela física, com esses comportamentos podemos dizer a <strong>velocidade</strong> com que o objeto pode se mover</li><li>Podemos <strong>testar se</strong> esse objeto está se movendo ou se está parado</li></ul></li><li><p>Um objeto do tipo <strong>Text</strong>:</p><ul><li>pode receber por <strong>padrão</strong> <strong>um texto a ser mostrado</strong>, </li><li>podemos <strong>adicionar um efeito</strong> como <strong><em>Glass</em></strong> fazendo o objeto ter o efeito de se parecer com vidro </li><li>podemos <strong>manipular informações</strong> como a <strong>cor do texto</strong></li></ul></li></ul><p>&nbsp;</p><p>Alguns <strong>tipos de objeto</strong> são usados para funções específicas do jogo, nesse caso eles não tem uma representação visual. Usamos eles apenas para <strong>executar ações</strong> ou <strong>testar coisas</strong></p><p>São tipos de objeto como:</p><ul><li><strong><em>Audio</em></strong>: ele representa os sons do jogo. Podemos dizer qual som tocar e testar se um certo som está tocando</li><li><strong><em>Keyboard</em></strong>:  ele representa o <strong>teclado</strong> do computador. Podemos apenas testar se uma certa tecla está sendo apertada</li></ul><p>&nbsp;</p><p><img src='assets/1523560822914.png' alt='1523560822914' /></p><p>&nbsp;</p><h3><a name='header-n514' class='md-header-anchor '></a>Tipos de Objeto e Instâncias</h3><p>Um <strong>tipo de objeto</strong> é como se fosse um <strong>molde</strong> ou <strong>base</strong>.</p><p>Eles ficam listados em <code>Project</code> &gt; <code>Object Types</code>:</p><p><img src='assets/1523561559711.png' alt='1523561559711' /></p><p>Considere que no seu jogo o player vai poder <strong>coletar moedas</strong>:</p><p>Imagine que você precisa colocar 100 moedas no jogo: todas elas valem a mesma quantidade de pontos, tem a mesma imagem e se comportam da mesma forma</p><p>&nbsp;</p><p><strong><em>Se todas elas são exatamente iguais, faz sentido criar um tipo de objeto para cada moeda, definir a mesma imagem, os mesmos valores e o mesmo comportamento?</em></strong></p><p><img src='assets/1523562165703.png' alt='1523562165703' /></p><p>&nbsp;</p><p><strong>A resposta é: não</strong></p><p>Para isso você precisa entender a diferença entre um <strong>tipo de objeto</strong> e suas <strong>instâncias</strong></p><p>Um <strong>tipo de objeto</strong> é uma base para criar objetos, enquanto uma <strong>instância</strong> é o resultado do uso da base</p><p>&nbsp;</p><p>Você pode pensar no <strong>tipo de objeto</strong> como a <strong>planta de uma casa</strong> você define coisas fixas com ela, quantas  são as paredes, portas, etc.</p><p>Essa planta pode ser utilizada para construir <strong>várias casas</strong>, elas são bem parecidas, mas podem ter coisas diferentes como a cor e o número da casa, mas não o lugar onde fica uma das paredes.</p><p>Um tipo de objeto diz <strong>quais coisas uma instância pode ter</strong>, uma <strong>instância</strong> é a realização dessa base, da planta da casa.</p><p>Uma planta diferente diz respeito a um conjunto de casas diferentes</p><p>&nbsp;</p><p><strong><em>Se você pensar que a planta de uma casa é um tipo de objeto, as casas que você pode fazer a partir dessa planta são as instâncias</em></strong></p><p><img src='assets/1523572536414.png' alt='1523572536414' /></p><p>&nbsp;</p><p><strong><em>Se você pensar que o projeto (desenho) de uma caneta é um tipo de objeto, quando alguém usa esse desenho para fazer uma caneta de verdade, está criando uma instância</em></strong></p><p><img src='assets/1523572699125.png' alt='1523572699125' /></p><p>&nbsp;</p><p>&nbsp;</p><p>Uma caneta de verdade poderia, por exemplo, ter diferentes cores. Mudamos a propriedade, mas não o plano que define como uma caneta geral é.</p><p>&nbsp;</p><p><img src='assets/1523572805527.png' alt='1523572805527' /></p><p>&nbsp;</p><p>O <strong>tipo de objeto</strong> define coisas fixas como:</p><ul><li>Material da caneta</li><li>Quantidade de tinta numa caneta nova</li><li>Tamanho da caneta</li></ul><p>A caneta tem <strong>propriedades</strong> que podem mudar de acordo com a caneta:</p><ul><li><strong>Cor da tampa</strong></li><li><strong>Cor da tinta</strong></li><li><strong>Cor da ponta</strong></li></ul><p>O tipo de objeto pode <strong>preencher</strong> esses lugares com <strong>valores padrão</strong></p><ul><li><strong>Cor da tampa</strong>: azul</li><li><strong>Cor da tinta</strong>: azul escuro</li><li><strong>Cor da ponta</strong>: azul</li></ul><p>Uma <strong>instância</strong> pode <strong>trocar</strong> esses valores que podem mudar. Se você não disser um novo valor, o valor padrão será mantido:</p><p>Uma <strong>instância com as propriedades</strong>:</p><ul><li><strong>Cor da tampa</strong>: vermelha</li><li><strong>Cor da tinta</strong>: vermelho claro</li></ul><p>Será:</p><ul><li><strong>Cor da tampa</strong>: vermelha</li><li><strong>Cor da tinta</strong>: vermelho claro</li><li><strong>Cor da ponta</strong>: azul</li></ul><p>&nbsp;</p><p>Como não dissemos qual a cor da tampa, o valor padrão foi colocado.</p><p>Do mesmo jeito, no seu jogo, para colocar as moedas você só precisa <strong>criar uma moeda que servirá de base para todas as outras</strong> esse será o <strong>tipo de objeto</strong>, as moedas criadas a partir desse &quot;molde&quot; serão as <strong>instâncias</strong></p><p><img src='assets/1523573014814.png' alt='1523573014814' /></p><p>O <strong>tipo de objeto</strong> diz quais são os <strong>valores que uma moeda pode ter</strong> e coloca alguns <strong>valores padrão</strong>, quando criamos uma <strong>instância</strong> podemos:</p><ul><li>Alterar alguns valores</li><li>Completar campos que estavam vazios</li></ul><p><img src='assets/1523573304490.png' alt='1523573304490' /></p><h2><a name='header-n1303' class='md-header-anchor '></a>Variáveis</h2><h3><a name='header-n1309' class='md-header-anchor '></a>O que é uma variável?</h3><p>Uma variável é um campo no nosso jogo que guarda um valor que <strong>pode mudar</strong> ao longo do jogo. </p><p>Pode ser um <strong>número</strong>, um <strong>texto</strong> ou valor booleano (<strong>verdadeiro/falso</strong>)</p><p><img src='assets/1523576914708.png' alt='1523576914708' /></p><p>&nbsp;</p><p>Por exemplo, no jogador, a velocidade máxima é guardada numa variável chamada <code>Max Speed</code>, você pode mudar o valor inicial nas propriedades ou mudar usando a programação (quando ele pegar um certo item poderá andar mais rápido por exemplo)</p><p>&nbsp;</p><h3><a name='header-n1369' class='md-header-anchor '></a>Variável de instância</h3><p>Você viu como existe uma diferença entre um <strong>tipo de objeto</strong> e uma <strong>instância</strong> isso pode ficar mais claro com o entendimento do que é uma <strong>variável de instância</strong>.</p><p>No exemplo das moedas, você viu que elas tinham um atributo <strong>vale pontos</strong>, que indica quantos pontos uma moeda vai dar ao jogador.</p><p>&nbsp;</p><p><img src='assets/1523576077091.png' alt='1523576077091' /></p><p>&nbsp;</p><p>&nbsp;</p><p><img src='assets/1523577239086.png' alt='1523577239086' /></p><p>&nbsp;</p><p>Frequentemente precisamos criar esses &quot;espaços&quot; para guardar os valores que nós queremos, essas são as <strong>variáveis de instância</strong></p><p>&nbsp;</p><p>Por exemplo, para o jogador queremos guardar:</p><ul><li>Quantas vidas ele tem</li><li>Quantas moedas ele pegou</li></ul><p>&nbsp;</p><p>Precisamos criar variáveis de instância pois esses valores não existem ainda: eles não vêm com o <strong>Tipo de Objeto Sprite</strong> ou com o <strong>Comportamento Plataforma</strong></p><p>&nbsp;</p><p><img src='assets/1523577702895.png' alt='1523577702895' /></p><p>&nbsp;</p><p>Vale lembrar que esses valores estão associados a <strong>instância</strong> jogador, por isso são <strong>variáveis de instância</strong></p><p>No caso do inimigo, que tem a <strong>variável de instância</strong> <code>Hitpoints</code> (vidas). Cada <strong>instância</strong> de inimigo pode ter um número diferente de vidas, se removermos um deles o número na quantidade de vidas também será removido.</p><p><img src='assets/1523578050320.png' alt='1523578050320' /></p><p>Quando eu quiser consultar o valor <code>Vidas</code> terei que dizer <strong>de qual inimigo estou falando</strong></p><p>&nbsp;</p><h3><a name='header-n1626' class='md-header-anchor '></a>Variáveis Globais</h3><p>Variáveis globais funcionam da mesma forma como as variáveis de instância, mas elas não estão relacionadas com objetos do jogo. Elas existem enquanto o jogo estiver aberto.</p><p>&nbsp;</p><p><img src='assets/1523578381945.png' alt='1523578381945' /></p><p>&nbsp;</p><p>&nbsp;</p><h2><a name='header-n2098' class='md-header-anchor '></a>Acessando variáveis e executando funções</h2><p><img src='assets/concat.png' alt='img' /></p><p><img src='assets/lerp.png' alt='img' /></p><p>Algumas vezes precisamos usar fórmulas para fazer certas atividades no nosso jogo. Lembre-se de que:</p><ul><li><p>Tudo que for escrito e <strong>não</strong> estiver entre aspas: <code>&quot;  ...  &quot;</code> será interpretado como um <strong>comando</strong></p></li><li><p>Para acessar valores dentro de <strong>instâncias</strong> use: <code>NomeObjeto.NomeVariável</code></p></li><li><p>Números com vírgula como:  <span class="MathJax_Preview"></span><span class="MathJax_SVG" id="MathJax-Element-1-Frame" tabindex="-1" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.517ex" height="2.344ex" viewBox="0 -755.9 1944.7 1009.2" role="img" focusable="false" style="vertical-align: -0.588ex;"><defs><path stroke-width="0" id="E1-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path><path stroke-width="0" id="E1-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path><path stroke-width="0" id="E1-MJMAIN-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path><path stroke-width="0" id="E1-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMAIN-30" x="0" y="0"></use><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMAIN-2C" x="500" y="0"></use><g transform="translate(944,0)"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMAIN-33"></use><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMAIN-35" x="500" y="0"></use></g></g></svg></span><script type="math/tex" id="MathJax-Element-1">0,35</script>, devem ser representados com o ponto <code>0.35</code></p></li><li><p>Para juntar textos e números coloque um <code>&amp;</code> entre eles: <code>&quot;bom dia para &quot; &amp; 0 &amp; &quot; pessoas&quot;</code> irá resultar em: <code>bom dia para 0 pessoas</code></p></li><li><p>Se você escrever o nome de uma variável, ele será trocado pelo valor: <code>&quot;Você tem &quot; &amp; Player.moedas &amp; &quot; moedas&quot;</code>. Se o jogador tiver 20 moedas esse valor será trocado em <code>Player.moedas</code> resultando em: <code>Você tem 20 moedas</code></p></li><li><p>Quando fazemos algo do tipo <code>umNome(valor1, valor2, ...)</code> estamos usando uma <strong>função</strong>, o construct vai usar os valores que você deu para realizar um cálculo (dependendo do nome da função) e essa parte será trocada pelo resultado desse cálculo</p><ul><li>Se você fizer <code>maior(2, 3)</code>  isso será trocado por <code>3</code>, já que o construct irá calcular que 3 é maior que 2 e irá trocar <code>maior(2, 3)</code> por esse resultado</li></ul></li></ul><p>&nbsp;</p><h2><a name='header-n2091' class='md-header-anchor '></a>Blocos de eventos</h2><h3><a name='header-n1641' class='md-header-anchor '></a>O que é um evento?</h3><p>Um evento é uma <strong>condição</strong> ligada a um ou mais <strong>objetos</strong> do jogo, por exemplo: no game, o teclado será representado por um <strong>objeto</strong> do tipo <strong>Keyboard</strong>, pois são os <strong>objetos</strong> que podem lançar <strong>eventos</strong>, assim, podemos no código monitorar por algum <strong>evento específico</strong>, nesse caso, pode ser quando alguma tecla for pressionada ou solta, então podemos executar alguma ação quando esse evento ocorrer.</p><p><img src='imgs/eventsheetexample.png' alt='' /></p><p>&nbsp;</p><p><img src='imgs/eventblock.png' alt='' /></p><p><strong>Lembre-se:</strong></p><ol start='' ><li>Um evento é qualquer acontecimento dentro do jogo</li><li>Posso criar um código que é ativado quando um evento ocorrer</li><li>Posso decidir quais ações devem acontecer quando esse evento for acionado</li></ol><p>&nbsp;</p><p><img src='assets/1523579166223.png' alt='1523579166223' /></p><p>&nbsp;</p><h3><a name='header-n2069' class='md-header-anchor '></a>Tipos de eventos</h3><p>Existem dois tipos de eventos</p><ul><li><p>Eventos que <strong>não começam</strong> com <code>On</code></p><ul><li>As <strong>ações</strong> serão executadas <strong>enquanto</strong> a <strong>condição</strong> for verdadeira</li><li>Se a ação for fazer o personagem pular, ele irá pular <strong>repetidamente</strong> até você soltar a tecla</li></ul></li><li><p>Eventos que <strong>começam</strong> com <code>On</code></p><ul><li>As <strong>ações</strong> são executadas na <strong>primeira vez</strong> que a ação for verdadeira, ou seja, apenas <strong>no instante</strong> que o evento ocorrer</li><li>Se a ação for fazer o personagem pular, ele irá pular <strong>uma vez</strong> e só pulará novamente se você soltar a tecla e apertá-la novamente</li></ul></li></ul><p><img src='imgs/keydownkeypress.png' alt='' /></p><p><img src='imgs/onkeypress.png' alt='' /></p><p><img src='imgs/addaction.png' alt='' /></p><p><img src='imgs/systemaction.png' alt='' /></p><p>&nbsp;</p><h3><a name='header-n1923' class='md-header-anchor '></a>Juntando eventos</h3><h4><a name='header-n1924' class='md-header-anchor '></a>Evento do tipo <em>AND</em> / E</h4><p>Você pode precisar que mais de um evento esteja acontecendo ao mesmo tempo para executar algum bloco. Quando existe <strong>mais de uma condição</strong> e precisamos que <strong>todas</strong> sejam verdadeiras, usamos o <em>AND</em></p><p>Inserindo uma nova condição</p><p><img src='imgs/insertbelow.png' alt='' /></p><p>&nbsp;</p><p>Outra forma de fazer isso</p><p>&nbsp;</p><p><img src='imgs/addanothercondition.png' alt='' /></p><p>&nbsp;</p><p>Um bloco do tipo <em>AND</em> fica dessa forma</p><p>&nbsp;</p><p><img src='imgs/andblock.png' alt='' /></p><p>&nbsp;</p><h4><a name='header-n1949' class='md-header-anchor '></a>Evento do tipo <em>OR</em> / <em>OU</em></h4><p>&nbsp;</p><p>Num evento do tipo <em>OR</em> , o bloco é executado quando <strong>uma ou mais</strong> condições são verdadeiras.</p><p>Para fazer um bloco <em>OR</em> você precisa começar por um do tipo <em>AND</em> e usar a opção <code>Make OR block</code></p><p>&nbsp;</p><p><img src='imgs/makeorblock.png' alt='' /></p><p>&nbsp;</p><p>Ele ficará assim:</p><p>&nbsp;</p><p><img src='imgs/orblock.png' alt='' /></p><p>&nbsp;</p><p>Você pode torná-lo um bloco <em>AND</em> usando a seguinte opção:</p><p>&nbsp;</p><p><img src='imgs/makeandblock.png' alt='' /></p><p>&nbsp;</p><h4><a name='header-n1978' class='md-header-anchor '></a>Invert</h4><p>Caso você queira que o bloco <strong>seja executado</strong> quando uma condição <strong>não</strong> for verdadeira, use a opção <em>invert</em></p><p><img src='imgs/invert.png' alt='' /></p><p>&nbsp;</p><p>Um bloco com um invert fica assim:</p><p><img src='imgs/invertblock.png' alt='' /></p><p>&nbsp;</p><p>Perceba que na imagem existe uma junção do bloco <em>AND</em> com o <em>invert</em> nesse caso, você pode ler essa condição como:</p><p>&nbsp;</p><p>*&quot;Execute as ações a seguir **se** A tecla <em>W</em> do teclado estiver sendo apertada <strong>E</strong> o player <strong>Não</strong> estiver pulando&quot;*</p><p>&nbsp;</p><p><img src='imgs/condition.png' alt='' /></p><p>&nbsp;</p><h4><a name='header-n2003' class='md-header-anchor '></a><em>Else</em> (Senão)</h4><p>Um bloco do tipo <em>else</em> é executado quando o que foi testado em um evento não ocorreu: você pode fazer o teste de algo e o seu inverso em um mesmo bloco.</p><p>&nbsp;</p><p>Um bloco else é criado dessa forma:</p><p><img src='imgs/addelse.png' alt='' /></p><p>O resultado será:</p><p>&nbsp;</p><p><img src='imgs/elseblock.png' alt='' /></p><p>&nbsp;</p><p>&nbsp;</p><p>Você pode ler o <em>else</em> como: <em>Execute essa ação se algo acontecer, <strong>caso contrário</strong> execute outra ação</em></p><p>&nbsp;</p><p><img src='imgs/equivalence.png' alt='' /></p><p>&nbsp;</p><h4><a name='header-n2030' class='md-header-anchor '></a>Subeventos</h4><p>Subeventos são maneiras de condensar o código e evitar repetição. Imagine que você tem que programar o seguinte:</p><p>&nbsp;</p><p><em>Se o jogador encostar numa alavanca um som deve ser tocado, se ele apertar a tecla <code>x</code> a alavanca deve mudar de posição</em></p><p>&nbsp;</p><p>Sem o uso de sub eventos a solução poderia ser assim:</p><p>&nbsp;</p><pre class="md-fences md-end-block" lang=""> <div class="CodeMirror cm-s-inner CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 4px;"></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 30px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">SE (jogador está encostando na alavanca):</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>toque o som</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">SE (jogador está encostado na alavanca E a tecla x está sendo apertada):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>mude a posição da alavanca</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 102px;"></div><div class="CodeMirror-gutters" style="display: none; height: 132px;"></div></div></div></pre><p>&nbsp;</p><p><img src='imgs\1521464102322.png' alt='52146410232' /></p><p>&nbsp;</p><p>Veja que uma das condições se repete, podemos  condensar isso usando um subevento da seguinte forma:</p><p>&nbsp;</p><pre class="md-fences md-end-block" lang=""> <div class="CodeMirror cm-s-inner CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 4px;"></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 30px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">SE (jogador está encostando na alavanca):</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>toque o som</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>SE (tecla x está sendo apertada):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span>mude a posição da alavanca</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 103px;"></div><div class="CodeMirror-gutters" style="display: none; height: 133px;"></div></div></div></pre><p><img src='imgs\1521464222292.png' alt='52146422229' /></p><p>&nbsp;</p><p>Para criar um subevento use:</p><p><img src='imgs\1521464282875.png' alt='52146428287' /></p></div>
+</body>
+</html>
