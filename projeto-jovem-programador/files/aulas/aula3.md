@@ -20,7 +20,27 @@ Crie um objeto do tipo *Sprite* para representar as moedas, crie duas animaçõe
 
 
 
-Você pode usar a mesma técnica para duplicar objetos ensinada antes e definir qual vai ser a animação que deve ocorrer na moeda da seguinte forma:
+Defina a caixa de colisão para as moedas e use a opção de aplicar para todas as animações, assim como fizemos com o Player anteriormente.
+
+![1523886878692](assets/1523886878692.png)
+
+
+
+Dê um duplo clique  em um dos quadrados vermelhos para adicionar um outro ponto **antes** dele
+
+![1523886938286](assets/1523886938286.png)
+
+![1523886982394](assets/1523886982394.png)
+
+![1523886999875](assets/1523886999875.png)
+
+Aplicando para todas as animações:
+
+![1523887083487](assets/1523887083487.png)
+
+
+
+Você pode usar a mesma técnica para duplicar objetos ensinada anteriormente (clicar no objeto a copiar, segurar a tecla `ctrl` e arrastar o mouse) e definir qual vai ser a animação que deve ocorrer na moeda da seguinte forma:
 
 
 
@@ -38,7 +58,7 @@ O primeiro passo é criar uma variável de instância ao Player. Uma variável d
 
 
 
-![](imgs/addinsvar.png)
+![1523887250235](assets/1523887250235.png)
 
 
 
