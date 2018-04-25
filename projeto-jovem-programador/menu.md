@@ -13,6 +13,7 @@
   * [Arquivo: projeto na aula 2](files\projects\Aula2_arq1.c3p)
   * [Arquivo: projeto na aula 2 (com correções)](files\projects\Aula2_arq2.c3p)
 * [**Aula 3**](files/aulas/aula3.html)
+  * [Arquivo: projeto na aula 3](files\projects\Aula3.c3p)
 * [**Aula 4**](files/aulas/aula4.html)
 * [**Aula 5**](files/aulas/aula5.html)
 * [**Aula 6**](files/aulas/aula6.html)
@@ -55,6 +56,7 @@
 ## Outros sites
 
 * [Sites de apoio](links_de_apoio.html)
+* [Projeto Finalizado](files/projects/ProjetoFinalizado.c3p)
 
 
 
