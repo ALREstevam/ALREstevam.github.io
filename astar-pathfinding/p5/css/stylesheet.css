@@ -1,2 +1,130 @@
 
-body {padding: 0; margin: 0;}
+body {
+    padding: 0px 50px 0px 50px;
+    margin: 0;
+    font-family: "Open Sans", SansSerif, sans-serif;
+}
+
+#content{
+    /*column-count: 2;*/
+}
+
+#leftSection{
+
+}
+
+#rightSection{
+}
+
+#content{
+}
+
+#data{
+}
+
+#mynetwork {
+    width: 100%;
+    height: auto;
+    min-height: 1000px;
+    border: 1px solid lightgray;
+}
+
+.formula{
+    font-family: "Cambria Math", Cambria, Georgia, serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+}
+
+.columnSmall {
+    flex: 20%;
+}
+
+.columnLarge {
+    flex: 70%;
+}
+
+
+
+.defaultButton{
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin: 3px;
+}
+
+.geenButton:hover{
+     background-color: #4CAF50; /* Green */
+     color: white;
+ }
+
+.blueButton:hover{
+    background-color: #008CBA;
+    color: white;
+}
+
+.redButton:hover{
+    background-color: #f44336;
+    color: white;
+}
+
+.grayButton:hover{
+    background-color: #e7e7e7;
+    color: black;
+}
+
+.blackButton:hover{
+    background-color: #555555;
+    color: white;
+}
+
+/*****/
+
+.geenButton{
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.blueButton{
+    background-color: #008CBA;
+    color: white;
+}
+
+.redButton{
+    background-color: #f44336;
+    color: white;
+}
+
+.grayButton{
+    background-color: #e7e7e7;
+    color: black;
+}
+
+.blackButton{
+    background-color: #555555;
+    color: white;
+}
+
+/*****/
+
+
+.divOverflow{
+    overflow: auto;
+    max-height: 100vh;
+}
+
+.listItemTitle{
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 15pt;
+}

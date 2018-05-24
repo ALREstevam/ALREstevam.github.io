@@ -4,16 +4,105 @@
     <meta charset="utf-8">
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
     <link href="../css/stylesheet.css" rel="stylesheet" type="text/css">
+    <link href="../css/w3sModal.css" rel="stylesheet" type="text/css">
+    <link href="../vis/vis.min.css" rel="stylesheet" type="text/css">
 
+    <script src="rgbaToHex.js"></script>
     <script src="../p5.min.js"></script>
     <script src="../addons/p5.dom.js"></script>
     <script src="../addons/p5.sound.js"></script>
+    <script src="../vis/vis.min.js"></script>
+    <script src="../vis/visNetHelper.js"></script>
+    <script src="Cell.js"></script>
+    <script src="setupCode.js"></script>
+    <script src="util.js"></script>
+    <script src="pathfind.js"></script>
 
 
 
   </head>
   <body>
-      <script src="sketch.js"></script>
+      <div id="content" class="row">
+        <div  class="column">
+
+          <div id="leftSection">
+            <h1>Pathfinding</h1>
+            <script src="sketch.js"></script>
+          </div>
+
+          <div class="columnSmall" id="data">
+            <h2>Execution data</h2>
+          </div>
+        </div>
+
+
+
+
+        <div id="rightSection" class="column">
+          <h2>Configurations</h2>
+          <div class="row">
+            <div id="configuration" class="column"></div>
+            <div id="configuration2" class="column"></div>
+          </div>
+          <div id="buttonArea"></div>
+
+          <div class="row">
+            <div class="columnLarge">
+                <h2>Nodes</h2>
+                <div class="row">
+
+                  <div class="column" id="openedLog">
+                    <h3>Opened Nodes Log</h3>
+                  </div>
+                  <div class="column" id="closedLog">
+                    <h3>Closed Nodes Log</h3>
+                  </div>
+
+                  <div class="column" id="pathLog">
+                    <h3>Path Nodes Log</h3>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="mynetwork">
+
+      </div>
+
+
+
+      <div id="id01" class="w3-modal">
+        <div class="w3-modal-content">
+
+          <header class="w3-container w3-teal">
+      <span onclick="document.getElementById('id01').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+            <h2>Heuristic formula explanation</h2>
+          </header>
+
+          <span class='formula'>f(n) = (a * pathDist(n)) + (b * goalDist(n)) + (c * difDist(n))</span><br>
+          <ul>
+            <li><span class='formula'>n</span>: a node</li>
+            <li><span class='formula'>f(n)</span>: the heuristic function</li>
+            <li><span class='formula'>pathDist(n)</span>: the real distance in the path to the node i</li>
+            <li><span class='formula'>goalDist(n)</span>: the distance between the start and the goal</li>
+            <li><span class='formula'>difDist(n)</span>: the difficulty of the current path</li>
+            <li><span class='formula'>a, b & c</span>: </li>
+          </ul>
+
+          <footer class="w3-container w3-teal">
+            <p></p>
+          </footer>
+
+        </div>
+      </div>
+
+
 
   </body>
 </html>
