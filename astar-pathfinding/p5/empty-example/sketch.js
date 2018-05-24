@@ -28,8 +28,12 @@ function generateGrid() {
         }
     }
 
-    start = grid[0][0];
-    end = grid[cols - 1][rows -1];
+
+    var startPoint = ceil(random(0, rows/4));
+    var endPoint = ceil(random(rows/4, rows-1));
+
+    start = grid[startPoint][startPoint];
+    end = grid[endPoint][endPoint];
 
     calculateNeigbours();
     end.setDifficulty(0.1);
@@ -119,7 +123,6 @@ function draw() {
     }
     var openSetLen = openSet.length;
     for(i = 0; i < openSetLen; i++){
-        //openSet[i].showPath(color(132, 132, 132));
         openSet[i].inOpenSet = true;
 
         openedHtml += "<span>" +
@@ -159,12 +162,55 @@ function draw() {
     pathLen.html("<strong>Path lenght: </strong>" + path.length);
     pathCost.html('<strong>Path cost:</strong> ' + countPathCost);
 
+
     openedNodesText.html('<strong>Opened nodes:</strong> ' + openSet.length);
     closedNodesText.html('<strong>Closed nodes:</strong> ' + closeSet.length);
     totalNodes.html('<strong>Total nodes:</strong> ' + totalNodesCount);
 
-    nValueText.html('<strong>Straight line distance:</strong> ' + nValueInput.value());
-    mValueText.html('<strong>Path difficulty:</strong>' +  mValueInput.value());
+    wValueText.html('<strong>w: controla g(n):</strong> ' +   wValueInput.value());
+    xValueText.html('<strong>x: controla h(n):</strong>' +           xValueInput.value());
+    yValueText.html('<strong>y: controla dif(n):</strong> ' +   yValueInput.value());
+    zValueText.html('<strong>z: controls risk(n):</strong>' +           zValueInput.value());
+
+
+    var formulaHtml = "<span class='formula'>f(n) =1 + w * (y * dif(n) + z * rsk(n)) + x *(h(n))</span><br>";
+    formulaHtml += "<span class='formula'>f(n) = 1";
+
+    if(wValueInput.value() != 0 && (yValueInput.value() != 0 || zValueInput.value() != 0)){
+        formulaHtml += ' + ';
+        formulaHtml +=  wValueInput.value() + " * ( ";
+        if(yValueInput.value() != 0){
+            formulaHtml += yValueInput.value() + " * dif(n)";
+        }
+
+        if(yValueInput.value() != 0 && zValueInput.value() != 0){
+            formulaHtml += " + ";
+        }
+
+        if(zValueInput.value() != 0){
+            formulaHtml += zValueInput.value() + " * rsk(n)";
+        }
+        formulaHtml += " ) ";
+
+        if(xValueInput.value() != 0){
+            formulaHtml += " + ";
+        }
+    }else{
+        if(xValueInput.value() != 0){
+            formulaHtml += ' + ';
+        }
+    }
+    if(xValueInput.value() != 0){
+        formulaHtml += " " + xValueInput.value() + " * (h(n))";
+    }
+    formulaHtml += "</span>";
+
+
+
+    //f(n) = 1 + w * (y * dif(n) + z * rsk(n)) + x *(h(n))
+    
+    heuristicFormula.html(formulaHtml);
+        
 
     randomObstaclePercentageText.html('<strong>Random obstacles percentage:</strong> ' + randomObstaclePercentageSlider.value() + "\% (x100)");
     groupObstacleText.html('<strong>Group obstacle percentage:</strong> ' + groupObstacleSlider.value() + '\% (x100)');
@@ -220,13 +266,13 @@ function randomizeInputSeedText(){
 
 /*Função que dispara o início da busca*/
 function begin() {
-    m = mValueInput.value();
-    n = nValueInput.value();
+    m = wValueInput.value();
+    n = xValueInput.value();
     execute = true;
     runStatus.html('<strong>Status: </strong> running...');
 }
 
-var treeNet;
+var treeNet = undefined;
 var treeContainerName = 'mynetwork';
 
 /*Função que limpa as estruturas de dados geradas e prepara uma nova execução*/
@@ -267,29 +313,51 @@ function reset() {
     stepsCount = 0;
     generateGrid();
     runStatus.html('<strong>Status: </strong> not started.');
-
-    if(network != undefined){
-        network.destroy();
+    
+    
+    if(treeNet == undefined){
+        treeNet = new MyTreeNetwork();
     }
-    createNetwork(treeContainerName);
+    treeNet.deleteNetwork();
+    //treeNet.createNetwork(treeContainerName);
+    treeNet.addFirstNodeWithId(getIdFrom(start), formatNetElemText(start), "rgb(255, 55, 55)");
 
-    addFirstNodeWithId(formatNetElemId(start), formatNetElemText(start), formatNetElemColor(start));
+
+    wWeight = wValueInput.value();
+    xWeight = xValueInput.value();
+    yWeight = yValueInput.value();
+    zWeight = zValueInput.value();
+}
+
+function showTreeNetwork(){
+    if(treeNet == undefined){
+        treeNet = new MyTreeNetwork();
+    }
+    treeNet.commitNetwork();
+    treeNet.createNetwork(treeContainerName);
 }
 
 function formatNetElemId(elem){
     elem.idCount += 1;
-    return parseInt(elem.x + '' + elem.y + '' + elem.idCount);
+    return parseInt('1' + elem.x + '00' + elem.y + '00' + elem.idCount);
 }
 
 function getIdFrom(elem) {
-    return (elem.x + '' + elem.y + '' + elem.idCount);
+    return parseInt('1' + elem.x + '00' + elem.y + '00' + elem.idCount);
 }
 
 function formatNetElemText(elem){
-    return 'xy('+ elem.x + ', '  + elem.y +')';
+    return 'xy('+ elem.x + ', '  + elem.y +')\nf(n) = ' + elem.f;
 }
 
 function formatNetElemColor(elem){
     rgbaToHex(elem.mycolor.toString());
+}
+
+function formatArrowText(elem) {
+    return 'h(n) = ' + elem.h + '\n' +
+           'g(n) = ' + elem.g + '\n' +
+           'dif(n) = ' + elem.difficulty + '\n' +
+           'risk(n) = ' + elem.risk + '\n';
 }
 

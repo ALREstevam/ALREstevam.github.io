@@ -40,12 +40,8 @@ function Cell(xpos, ypos){
         var g = 1;
         var b = 1;
 
-        if(this == start){
-            r = 255;
-            g = 0;
-            b = 0;
-        }else if(this == end){
-            r = 255;
+        if(this == start || this == end){
+            r = 0;
             g = 0;
             b = 0;
         }
@@ -56,9 +52,9 @@ function Cell(xpos, ypos){
             b = 204;
         }else if(this.supereasy){
             //Supereasy cell
-            r = 60;
+            r = 56;
             g = 255;
-            b = 53;
+            b = 66;
         }else if(this.risk > 0){
             r = (this.risk * 5) + 50;
             g = ((this.risk * 5) + 50)/2;
@@ -67,16 +63,19 @@ function Cell(xpos, ypos){
         else{
             //Normal cell
             r = 32;
-            g = 255 - ((this.difficulty * 3) % 200);
+            g = 255 - ((this.difficulty * 3));
             b = 0;
         }
 
-        if(this.inClosedSet){
-            r += 150;
-        }else
-        if(this.inOpenSet){
-            b += 150;
-            g += 150;
+        if(this != start && this != end){
+            if(this.inClosedSet){
+                r += 150;
+            }
+            else
+            if(this.inOpenSet){
+                b += 150;
+                g += 150;
+            }
         }
 
 
@@ -97,7 +96,7 @@ function Cell(xpos, ypos){
             sumAmount = random(0.7);
         }
 
-        var maxValue = abs(heuristic(start, end, choosenDistanceMethod)/3);
+        var maxValue = floor(abs(heuristic(start, end, choosenDistanceMethod)/3));
         this.difficulty = floor(initialDif);
 
         var tempArr = shuffleArr(this.neighbors);
@@ -105,9 +104,13 @@ function Cell(xpos, ypos){
         for(var i = 0; i < tempArr.length; i++){
             if(!tempArr[i].mark && !tempArr[i].wall){
                 tempArr[i].mark = true;
-                tempArr[i].setDifficulty((initialDif + sumAmount) % maxValue);
+                tempArr[i].setDifficulty(   floor((initialDif + sumAmount) % maxValue) + 1   );
 
-                if(this.difficulty > maxValue - floor(difficultPathToWallAmount * 100)/7){
+                if(this.difficulty <= 0){
+                    this.difficulty = 1;
+                }
+
+                if(this.difficulty > maxValue - floor(difficultPathToWallAmount * 100)/5){
                     this.wall = true;
                 }
 
@@ -124,20 +127,14 @@ function Cell(xpos, ypos){
                         }
                     }
                 }
+
+
+
             }
         }
 
 
-        var wallRoundCount = 0;
-        for(i = 0; i < this.neighbors.length; i++){
-            if(this.neighbors[i].wall){
-                wallRoundCount++;
-            }
-        }
 
-        if(wallRoundCount == this.neighbors.length){
-            this.wall = true;
-        }
 
     };
 

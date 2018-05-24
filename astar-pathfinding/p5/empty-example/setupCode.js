@@ -75,10 +75,15 @@ var pathCost;
 var openedNodesText;
 var closedNodesText;
 var totalNodes;
-var mValueText;
-var nValueText;
-var nValueInput;
-var mValueInput;
+var wValueText;
+var xValueText;
+var xValueInput;
+var wValueInput;
+var yValueText;
+var zValueText;
+var yValueInput;
+var zValueInput;
+var heuristicFormula;
 var randomSeedInput;
 var randomObstaclePercentageText;
 var randomObstaclePercentageSlider;
@@ -99,9 +104,7 @@ var fastExecuteFlag = false;
 
 /*======================================= VARIÁVEIS QUE MUDAM O COMPORTAMENTO DO PROGRAMA ===========================*/
 
-var m; //neighbour.g -> difficulty weight
-var n; //neighbour.h -> distance to goal weight
-var o; //neighbour.risk -> consider risk areas weight
+var wWeight = 1, xWeight = 1, yWeight = 1, zWeight = 1;
 
 /*
  * A heurística utilizada será:
@@ -189,14 +192,25 @@ function setup() {
 
     createP("").parent("configuration");
 
-    mValueText = createP("m:").parent("configuration");
-    mValueInput = createSlider(0,1, 1, 0.1);//min, max, value, step
-    mValueInput.parent("configuration");
+    wValueText = createP("w: controla g(n)").parent("editwx");
+    wValueInput = createSlider(0,1, 1, 0.1);//min, max, value, step
+    wValueInput.parent("editwx");
 
-    nValueText = createP("n:").parent("configuration");
-    nValueInput = createSlider(0,1, 1, 0.1);//min, max, value, step
-    nValueInput.parent("configuration");
+    xValueText = createP("x: controla h(n)").parent("editwx");
+    xValueInput = createSlider(0,10, 1, 0.1);//min, max, value, step
+    xValueInput.parent("editwx");
 
+    yValueText = createP("w: controla dif(n)").parent("edityz");
+    yValueInput = createSlider(0,1, 1, 0.1);//min, max, value, step
+    yValueInput.parent("edityz");
+
+    zValueText = createP("x: controls risk(n)").parent("edityz");
+    zValueInput = createSlider(0,1, 1, 0.1);//min, max, value, step
+    zValueInput.parent("edityz");
+
+
+    heuristicFormula = createP("<span class='formula'>f(n) = w * (1 + y * dif(n) + z * rsk(n)) + x *(h(n))</span><br><span class='formula'>f(n) = w * (1 + y * dif(n) + z * rsk(n)) + x *(h(n))</span>");
+    heuristicFormula.parent('resutlFormula');
 
     var beginButton = createButton("Begin/Play");
     createP("").parent("configuration");
@@ -204,6 +218,7 @@ function setup() {
     var resetButton = createButton("Set / Reset");
     var pauseButton = createButton("Pause Execution");
     var stepExecuteButton = createButton("Next step");
+    var generateTreeButton = createButton("Generate Tree");
 
 
     createP("").parent("configuration");
@@ -213,18 +228,21 @@ function setup() {
     fastExecuteButton.parent("buttonArea");
     pauseButton.parent("buttonArea");
     stepExecuteButton.parent("buttonArea");
+    generateTreeButton.parent("buttonArea");
 
     beginButton.class("defaultButton geenButton");
     resetButton.class("defaultButton redButton");
     fastExecuteButton.class("defaultButton geenButton");
     pauseButton.class("defaultButton blackButton");
     stepExecuteButton.class("defaultButton blueButton");
+    generateTreeButton.class("defaultButton blueButton");
 
     beginButton.mousePressed(begin);
     resetButton.mousePressed(reset);
     fastExecuteButton.mousePressed(fastExecute);
     pauseButton.mousePressed(pauseExecution);
     stepExecuteButton.mousePressed(stepExecute);
+    generateTreeButton.mousePressed(showTreeNetwork);
 
     stepsText = createP('<strong>Steps:</strong> 0');
     runStatus = createP('<strong>Status:</strong> not running.');
@@ -269,3 +287,4 @@ function setup() {
 
     reset();
 }
+
