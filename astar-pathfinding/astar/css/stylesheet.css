@@ -89,7 +89,7 @@ body {
 
 /*****/
 
-.geenButton{
+.greenButton{
     background-color: #4CAF50; /* Green */
     color: white;
 }
@@ -127,4 +127,20 @@ body {
     text-decoration: underline;
     font-weight: bold;
     font-size: 15pt;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.smallThumb{
+    border: whitesmoke 3px solid;
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+}
+
+.smallThumb span{
 }

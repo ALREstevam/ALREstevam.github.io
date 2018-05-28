@@ -96,6 +96,9 @@ var groupObstacleSlider;
 var openedNodesLog;
 var closedNodesLog;
 var pathNodesLog;
+var mouseOverText;
+
+var divTextAboutNode;
 
 /*Flag: algoritmo está em execução*/
 var execute = false;
@@ -126,8 +129,6 @@ var wWeight = 1, xWeight = 1, yWeight = 1, zWeight = 1;
  *   menor distância até o objetivo.
  * SE m = 0 e n = 0 ENTÃO A FUNÇÃO HEURÍSTICA SERÁ: nenhuma O QUE LEVA A UMA BUSCA: em amplitude, os nós vizinhos do nós
  *   abertos serão explorados primeiro.
- *
- *
  * */
 
 
@@ -153,6 +154,7 @@ function setup() {
 
     var mycanvas = createCanvas(600, 600);
     mycanvas.parent("leftSection");
+    mycanvas.mouseOut(mouseIsNotOverSquare);
     //mycanvas.parent("canvasContainer");
 
     w = width/cols;
@@ -160,27 +162,60 @@ function setup() {
 
     generateGrid();
 
+
+    //INPUTS NA ÁREA DE CONFIGURAÇÕES
+
     inputSize = createInput("60", "number");
-    createP("Grid size:").parent("configuration");
+    createP("Tamanho do grid:").parent("configuration");
     inputSize.parent("configuration");
 
-    createP("Random seed for map generation:").parent("configuration");
+    createP("Semente para a geração do mapa:").parent("configuration");
     randomSeedInput = createInput(ceil(random(0, 200)), "number");
     randomSeedInput.parent("configuration");
 
-    var buttonRandomize = createButton('Randomize');
+    var buttonRandomize = createButton('🔀 Randomizar');
     buttonRandomize.parent("configuration");
     buttonRandomize.mousePressed(randomizeInputSeedText);
     buttonRandomize.class("defaultButton blueButton");
 
-    var showHeuristicButton = createButton('Show Heuristic Formula');
-    showHeuristicButton.parent("configuration");
-    showHeuristicButton.mousePressed(openHeuristicModal);
-    showHeuristicButton.class("defaultButton blueButton");
+    randomObstaclePercentageText = createP('<strong>Chance de um nó ser água:</strong> 0%');
+    randomObstaclePercentageSlider = createSlider(0,1, 0, 0.1);//min, max, value, step
+    randomObstaclePercentageText.parent('configuration2');
+    randomObstaclePercentageSlider.parent('configuration2');
 
-    openedNodesLog = createDiv('Nothing to show.');
-    closedNodesLog = createDiv('Nothing to show.');
-    pathNodesLog = createDiv('Nothing to show.');
+    groupObstacleText = createP('<strong>Chance de água em grupos:</strong> 0%');
+    groupObstacleSlider = createSlider(0,1, 0.5, 0.1);//min, max, value, step
+    groupObstacleText.parent('configuration2');
+    groupObstacleSlider.parent('configuration2');
+
+    allowDiagonalMovementText = createP('<strong>Permitir movimento na diagonal:</strong> yes');
+    allowDiagonalMovementRadio = createRadio('');
+    allowDiagonalMovementRadio.option('Sim   ', 1).checked = true;
+    allowDiagonalMovementRadio.option('Não   ', 0);
+    allowDiagonalMovementText.parent('configuration2');
+    allowDiagonalMovementRadio.parent('configuration2');
+
+    distanceMethodText = createP('<strong>Método de cálculo de distância:</strong> Manhattan');
+    distanceMethodRadio = createRadio('');
+    distanceMethodRadio.option('Euclidiana   ', 0).checked = true;
+    distanceMethodRadio.option('Manhattan   ', 1);
+    distanceMethodText.parent('configuration2');
+    distanceMethodRadio.parent('configuration2');
+
+
+    randomObstaclePercentageSlider.input(configsChanged);
+    groupObstacleSlider.input(configsChanged);
+    allowDiagonalMovementRadio.input(configsChanged);
+    distanceMethodRadio.input(configsChanged);
+
+    configsChanged();
+
+
+    //LISTAS DE NÓS: ABERTOS, FECHADOS E DO CAMINHO
+
+    openedNodesLog = createDiv('Nada a mostrar');
+    closedNodesLog = createDiv('Nada a mostrar.');
+    pathNodesLog = createDiv('Nada a mostrar.');
 
     openedNodesLog.parent('openedLog');
     closedNodesLog.parent('closedLog');
@@ -192,50 +227,82 @@ function setup() {
 
     createP("").parent("configuration");
 
-    wValueText = createP("w: controla g(n)").parent("editwx");
+    //ELEMENTOS DO MODAL: EDITAR HEURÍSTICA
+
+    wValueText = createP("w: controla <span class='formula'>g(n)</span>").parent("editwx");
     wValueInput = createSlider(0,1, 1, 0.1);//min, max, value, step
     wValueInput.parent("editwx");
 
-    xValueText = createP("x: controla h(n)").parent("editwx");
-    xValueInput = createSlider(0,10, 1, 0.1);//min, max, value, step
+    xValueText = createP("x: controla <span class='formula'>h(n)</span>").parent("editwx");
+    xValueInput = createSlider(0,2, 1, 0.1);//min, max, value, step
     xValueInput.parent("editwx");
 
-    yValueText = createP("w: controla dif(n)").parent("edityz");
+    yValueText = createP("w: controla <span class='formula'>dif(n)</span>").parent("edityz");
     yValueInput = createSlider(0,1, 1, 0.1);//min, max, value, step
     yValueInput.parent("edityz");
 
-    zValueText = createP("x: controls risk(n)").parent("edityz");
+    zValueText = createP("x: controla <span class='formula'>risk(n)</span>").parent("edityz");
     zValueInput = createSlider(0,1, 1, 0.1);//min, max, value, step
     zValueInput.parent("edityz");
 
+    wValueInput.input(changeHeuristicFormulaView);
+    xValueInput.input(changeHeuristicFormulaView);
+    yValueInput.input(changeHeuristicFormulaView);
+    zValueInput.input(changeHeuristicFormulaView);
 
     heuristicFormula = createP("<span class='formula'>f(n) = w * (1 + y * dif(n) + z * rsk(n)) + x *(h(n))</span><br><span class='formula'>f(n) = w * (1 + y * dif(n) + z * rsk(n)) + x *(h(n))</span>");
     heuristicFormula.parent('resutlFormula');
 
-    var beginButton = createButton("Begin/Play");
+    changeHeuristicFormulaView();
+
+    var setHeuristicButton = createButton('Definir nova heurística');
+    setHeuristicButton.parent('confirmBtn');
+    setHeuristicButton.class('defaultButton redButton center');
+    setHeuristicButton.mousePressed(reset);
+    createP("<i>Redefinir a heurística irá apagar o caminho atual.<br>" +
+        "A heurística só será redefinida usando este botão ou o botão \"reset\"." +
+        "</i>").parent('confirmBtn');
+
+
+
+    //BOTÕES NA ÁREA DE CONFIGURAÇÕES
+
+    var showHeuristicButton = createButton('⚙ Editar/Ver heurística');
+    showHeuristicButton.mousePressed(openHeuristicModal);
+    showHeuristicButton.class("defaultButton blueButton");
+
+    var beginButton = createButton("🞂 Iniciar/Continuar");
     createP("").parent("configuration");
-    var fastExecuteButton = createButton("Fast execute");
-    var resetButton = createButton("Set / Reset");
-    var pauseButton = createButton("Pause Execution");
-    var stepExecuteButton = createButton("Next step");
-    var generateTreeButton = createButton("Generate Tree");
-
+    var fastExecuteButton = createButton("⏭ Execução rápida");
+    var resetButton = createButton("↺ Setar/Resetar");
+    var pauseButton = createButton("❚❚ Pausar");
+    var stepExecuteButton = createButton("↝ Próximo passo");
+    var cleanNotPathButton = createButton("Manter apenas o caminho");
+    var generateTreeButton = createButton("🌳 Gerar árvore");
+    var subtitleButton = createButton("ℹ️ Legendas");
 
     createP("").parent("configuration");
-
     beginButton.parent("buttonArea");
     resetButton.parent("buttonArea");
     fastExecuteButton.parent("buttonArea");
     pauseButton.parent("buttonArea");
     stepExecuteButton.parent("buttonArea");
+    cleanNotPathButton.parent("buttonArea");
+    createP().parent('buttonArea');
+    showHeuristicButton.parent("buttonArea");
     generateTreeButton.parent("buttonArea");
+    subtitleButton.parent('buttonArea');
+    createP('<i>A geração da árvore pode demorar alguns segundos.</i>').parent('buttonArea');
+    
 
-    beginButton.class("defaultButton geenButton");
+    beginButton.class("defaultButton greenButton");
     resetButton.class("defaultButton redButton");
-    fastExecuteButton.class("defaultButton geenButton");
+    fastExecuteButton.class("defaultButton greenButton");
     pauseButton.class("defaultButton blackButton");
     stepExecuteButton.class("defaultButton blueButton");
-    generateTreeButton.class("defaultButton blueButton");
+    generateTreeButton.class("defaultButton greenButton");
+    subtitleButton.class("defaultButton blackButton");
+    cleanNotPathButton.class("defaultButton blackButton");
 
     beginButton.mousePressed(begin);
     resetButton.mousePressed(reset);
@@ -243,14 +310,19 @@ function setup() {
     pauseButton.mousePressed(pauseExecution);
     stepExecuteButton.mousePressed(stepExecute);
     generateTreeButton.mousePressed(showTreeNetwork);
+    subtitleButton.mousePressed(showSubtitleModal);
+    cleanNotPathButton.mousePressed(mantainPathClean);
 
-    stepsText = createP('<strong>Steps:</strong> 0');
-    runStatus = createP('<strong>Status:</strong> not running.');
-    pathLen = createP('<strong>Path lenght:</strong> 0');
-    pathCost = createP('<strong>Path cost:</strong> 0');
-    openedNodesText = createP('<strong>Opened nodes:</strong> 0');
-    closedNodesText = createP('<strong>Closed nodes:</strong> 0');
-    totalNodes = createP('<strong>Total nodes:</strong> 0');
+
+    //TEXTO SOBRE A EXECUÇÃO DO ALGORITMO
+
+    stepsText = createP('<strong>Passos:</strong> 0');
+    runStatus = createP('<strong>Status:</strong> parado.');
+    pathLen = createP('<strong>Tamanho do caminho:</strong> 0');
+    pathCost = createP('<strong>Custo do caminho:</strong> 0');
+    openedNodesText = createP('<strong>Nós abertos:</strong> 0');
+    closedNodesText = createP('<strong>Nós fechados:</strong> 0');
+    totalNodes = createP('<strong>Nós totais:</strong> 0');
 
     stepsText.parent("data");
     runStatus.parent("data");
@@ -261,29 +333,16 @@ function setup() {
     totalNodes.parent("data");
 
 
-    randomObstaclePercentageText = createP('<strong>Random obstacles percentage:</strong> 0%');
-    randomObstaclePercentageSlider = createSlider(0,1, 0, 0.1);//min, max, value, step
-    randomObstaclePercentageText.parent('configuration2');
-    randomObstaclePercentageSlider.parent('configuration2');
+    //TOOLTIP TEXT COM INFORMAÇÕES DO NÓ
 
-    groupObstacleText = createP('<strong>Group obstacle percentage:</strong> 0%');
-    groupObstacleSlider = createSlider(0,1, 0.5, 0.1);//min, max, value, step
-    groupObstacleText.parent('configuration2');
-    groupObstacleSlider.parent('configuration2');
+    divTextAboutNode = createDiv();
+    divTextAboutNode.style('position: absolute; visibility: hidden; background:rgba(255, 255, 255, 0.7); padding:10px; transition: background .5s, visibility .5s;');
+    divTextAboutNode.position(0, 0);
+    mouseOverText = createP('<strong>Mouse sob o nó: </strong> (x: ?, y: ?)');
+    mouseOverText.parent(divTextAboutNode);
 
-    allowDiagonalMovementText = createP('<strong>Allow diagonal movement:</strong> yes');
-    allowDiagonalMovementRadio = createRadio('');
-    allowDiagonalMovementRadio.option('Yes', 1).checked = true;
-    allowDiagonalMovementRadio.option('No', 0);
-    allowDiagonalMovementText.parent('configuration2');
-    allowDiagonalMovementRadio.parent('configuration2');
+    // CHAMANDO FUNÇÃO DE RESET
 
-    distanceMethodText = createP('<strong>Method to calculate distance:</strong> Manhattan');
-    distanceMethodRadio = createRadio('');
-    distanceMethodRadio.option('Euclidean', 0).checked = true;
-    distanceMethodRadio.option('Manhattan', 1);
-    distanceMethodText.parent('configuration2');
-    distanceMethodRadio.parent('configuration2');
 
     reset();
 }

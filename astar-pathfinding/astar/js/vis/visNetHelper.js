@@ -35,7 +35,9 @@ function MyTreeNetwork() {
         },
         layout: {
             hierarchical: {
-                direction: 'UD'
+                direction: 'UD',
+                nodeSpacing: 200,
+                levelSeparation: 200,
             }
         },
         physics:false
@@ -72,10 +74,14 @@ function MyTreeNetwork() {
 
     this.commitNetwork = function () {
         this.nodes = deepcopy(this.lazyNodes);
+
+        
+
+
         this.edges = deepcopy(this.lazyEdges);
     };
     
-
+    
 
     this.deleteNetwork = function () {
         console.log('Deleting network!');

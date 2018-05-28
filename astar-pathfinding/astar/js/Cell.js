@@ -2,6 +2,9 @@
  * Created by andre on 23/05/2018.
  */
 /*Definção do objeto que representa cada célula do grid / nó do grafo*/
+
+var bestPathDifficultyImportance = 0.1;
+
 function Cell(xpos, ypos){
 
     this.f = 0;
@@ -17,7 +20,7 @@ function Cell(xpos, ypos){
     this.wall = random(1) < randomWallPercentage;
     this.supereasy = false;
     this.risk = 0;
-    this.difficulty =  1;
+    this.difficulty =  0.1;
     this.inClosedSet = false;
     this.inOpenSet = false;
     this.mycolor = color(0, 0, 0);
@@ -25,8 +28,7 @@ function Cell(xpos, ypos){
 
     /*Mostrar o nó de forma visual: com uma cor especidifacada como argumento*/
     this.showPath = function (clr) {
-
-        if(clr.toString() != this.mycolor.toString()){
+        if(clr.toString() != this.mycolor.toString() && this != start && this!= end){
             fill(clr);
             this.mycolor = clr;
             noStroke();
@@ -63,7 +65,7 @@ function Cell(xpos, ypos){
         else{
             //Normal cell
             r = 32;
-            g = 255 - ((this.difficulty * 3));
+            g = 255 - ((this.difficulty * 3) / bestPathDifficultyImportance);
             b = 0;
         }
 
@@ -73,14 +75,23 @@ function Cell(xpos, ypos){
             }
             else
             if(this.inOpenSet){
-                b += 150;
-                g += 150;
+                //b += 150;
+                g -= 150;
+                r += 150;
             }
         }
+        var mouseOverTest = this.isMouseOverMe(mouseX, mouseY);
+        if(mouseOverTest){
+            r = 250;
+            g = 255;
+            b = 0;
+            mouseIsOverSquare(this);
+        }
 
-
-        this.mycolor =  color(r, g, b);
-        fill(this.mycolor);
+        if(!mouseOverTest){
+            this.mycolor =  color(r, g, b);
+        }
+        fill(color(r, g, b));
         noStroke();
         rect(this.x * w, this.y * h, w, h);
 
@@ -110,8 +121,12 @@ function Cell(xpos, ypos){
                     this.difficulty = 1;
                 }
 
-                if(this.difficulty > maxValue - floor(difficultPathToWallAmount * 100)/5){
+                if(this.difficulty > maxValue - floor(difficultPathToWallAmount * 100) * bestPathDifficultyImportance){
                     this.wall = true;
+                }
+
+                if(this.difficulty > maxValue - floor(difficultPathToWallAmount * 100)/3){
+                    this.difficulty += 20;
                 }
 
                 if(this.difficulty < maxValue - (maxValue * 0.8) && !this.wall){
@@ -133,7 +148,7 @@ function Cell(xpos, ypos){
             }
         }
 
-
+        this.difficulty /= 10;
 
 
     };
@@ -187,4 +202,14 @@ function Cell(xpos, ypos){
             }
         }
     };
+
+
+    this.isMouseOverMe = function (mx, my) {
+        var rectWidth = w;
+        var rectHeight = h;
+        var rectX = this.x * w;
+        var rectY = this.y * h;
+
+        return (mx > rectX && mx < rectX + rectWidth) && (my > rectY && my < rectY + rectHeight) ;
+    }
 }
