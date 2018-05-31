@@ -458,11 +458,18 @@ function mouseIsOverSquare(element){
         htmlVal += '<br><strong>Tipo:</strong> nó objetivo';
     }else if(element == start){
         htmlVal += '<br><strong>Tipo:</strong> nó inicial';
-    }else if(element.wall){
+    }else if(element.wall) {
         htmlVal += '<br><strong>Tipo:</strong> água';
+    }else if(element.isRoad){
+        htmlVal += '<br><strong>Tipo:</strong> trilha/pista';
     }else{
-        htmlVal += '<br><strong>Tipo:</strong> terra';
+        htmlVal += '<br><strong>Tipo:</strong> floresta';
     }
+
+    if(element.risk > 0){
+        htmlVal += " com risco";
+    }
+
 
     if(element.wall){
         htmlVal += '<br><strong>dificuldade:</strong> -';

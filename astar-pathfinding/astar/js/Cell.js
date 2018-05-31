@@ -104,7 +104,7 @@ Cell.prototype.setRisk = function (maxIterations, currentIteration, nextRisk) {
 
 
     this.mark = true;
-    this.risk = nextRisk;
+    this.risk = parseFloat((nextRisk).toFixed(2));
     var neib = undefined;
     var i;
     var tempArr = shuffleArr(this.neighbors);
@@ -165,7 +165,7 @@ Cell.prototype.setDifficulty = function (initialDif) {
             }
         }
     }
-    this.difficulty /= 7;
+    this.difficulty = parseFloat((this.difficulty/7).toFixed(2));
 };
 
 
@@ -261,9 +261,6 @@ Cell.prototype.roads = function (roadLen, previousNode, previousNodeIndex, roadT
     }
 
    this.setRoad();
-
-
-
     var turn = random(0, 1) < roadTurnPercentage;
 
     if(turn){
