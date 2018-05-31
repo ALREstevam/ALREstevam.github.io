@@ -83,7 +83,6 @@ function pathfindStep() {
                     path.push(temp.previous);
                     temp = temp.previous;
                 }
-
                 return;
             }
         }

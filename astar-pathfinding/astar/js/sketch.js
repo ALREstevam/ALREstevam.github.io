@@ -15,87 +15,169 @@ function setVariables() {
 /*Função que gera o grid colocando e conectando os nós*/
 function generateGrid() {
     var i;
-    grid = new Array(cols);
+    
     //Fazendo uma matriz bidimencional
+    
+    print('Generating matrix.');
+    grid = new Array(cols);
     for(i = 0; i < cols; i++){
         grid[i] = new Array(rows);
     }
 
     //Colocando um objeto em cada posição do vetor
+    print('Generating cells');
     for(i = 0; i < cols; i++){
         for(var j = 0; j < rows; j++){
             grid[i][j] = new Cell(i, j);
         }
     }
 
+    initMap();
+    totalNodesCount = countTotalWalkableNodes();
+}
 
+
+function initMap() {
+
+
+    calculateNeigbours(true);
+    defineStartEndPoints();
+    defineDifficulty();
+    defineRiskAreas();
+
+    calculateNeigbours(false);
+    
+    
+
+
+    getRandomNode().roads(ceil(rows * 0.7), undefined, 0, random(0.2, 0.7));
+    getRandomNode().roads(ceil(rows * 0.7), undefined, 1, random(0.2, 0.7));
+    getRandomNode().roads(ceil(rows * 0.7), undefined, 2, random(0.2, 0.7));
+    getRandomNode().roads(ceil(rows * 0.7), undefined, 3, random(0.2, 0.7));
+    end.roads(ceil(rows * 0.7), undefined, 3, random(0.2, 0.7));
+
+
+    calculateNeigbours(allowDiagonalMovement);
+}
+
+function cleanMark() {
+    var i;
+    for(i = 0; i < cols; i++){
+        for(var j = 0; j < rows; j++){
+            grid[i][j].mark = false;
+        }
+    }
+}
+
+function getRandomNode() {
+    var nodex = ceil(random(0, rows-1));
+    var nodey = ceil(random(0, cols-1));
+
+    return grid[nodex][nodey];
+}
+
+function defineStartEndPoints() {
+    //Definindo os pontos final e inicial
     var startPoint = ceil(random(0, rows/4));
     var endPoint = ceil(random(rows/4, rows-1));
 
     start = grid[startPoint][startPoint];
     end = grid[endPoint][endPoint];
 
-    calculateNeigbours();
-    end.setDifficulty(0.1);
-    calculateNeigbours();
-
-    for(i = 0 ; i < ceil(random(2, 8)); i++){
-        grid[ceil(random(0, rows-1))][ceil(random(0, cols-1))].setRisk(ceil(random(2, 6)), 0);
-    }
-
     //Colocando o ponto inicial na lista de nós abertos
     start.g = 0;
     start.h = heuristic(start, end, choosenDistanceMethod);
     start.f = start.g + start.h;
     openSet.push(start);
-    //console.log(grid);
+}
 
+function defineDifficulty() {
+    end.setDifficulty(0.1);
 
-    //Vizinhos dos e nós inicial e final não podem ser barreiras
     end.wall = false;
-
-    var i;
-    var neiborsLen = end.neighbors.length;
-
-    for(i = 0; i < neiborsLen; i++){
+    start.wall = false;
+    for(var i = 0; i < end.neighbors.length; i++){
         end.neighbors[i].wall = false;
     }
 
-    neiborsLen = start.neighbors.length;
-    start.wall = false;
-    for(i = 0; i < neiborsLen; i++){
+
+    for(var i = 0; i < start.neighbors.length; i++){
         start.neighbors[i].wall = false;
+    }
+
+    cleanMark();
+}
+
+function defineRiskAreas(){
+
+    //
+    var i;
+    var riskAreaNumber = ceil(random(1, (rows/10)/5));
+
+    for(i = 0 ; i < riskAreaNumber; i++){
+
+        var riskLevels = 1 + random(1, 2) * 2;
+        var riskAreaSize = ceil(riskLevels * riskLevels);
+        var initialRiskAmount = floor(random(50, heuristic(start, end)/3));
+        var riskX = ceil(random(0, rows-1));
+        var riskY = ceil(random(0, cols-1));
+
+        grid[riskX][riskY].setRisk(riskAreaSize,0,initialRiskAmount);
+    }
+
+    end.risk = 0;
+    start.risk = 0;
+    for(i = 0; i < end.neighbors.length; i++){
+        end.neighbors[i].risk = 0;
+    }
+
+
+    for(i = 0; i < start.neighbors.length; i++){
+        start.neighbors[i].risk = 0;
+    }
+
+    cleanMark();
+}
+
+function countTotalWalkableNodes() {
+    var i;
+    var walkables = 0;
+    for(i = 0; i < cols; i++){
+        for(var j = 0; j < rows; j++){
+            if(!grid[i][j].wall){
+                walkables += 1;
+            }
+        }
+    }
+    return walkables;
+}
+
+function showMap() {
+    var i;
+    for(i = 0; i < cols; i++){
+        for(var j = 0; j < rows; j++){
+            grid[i][j].show();
+        }
     }
 }
 
 
 
-var showFlag = true;
+var totalNodesCount = 0;
 /*Função que desenha a interface: essa função é chamada repetidamente pelo
 * framework utilizado, ela é utilizada ao invés de uma estrutura de repetição,
 * dessa forma cada etapa do algoritmo será desenhada na tela*/
+
+
+
 function draw() {
     background(0);
+    start.show();
     var i;
 
     /*Se a flag que indica que o algoritmo deve executar for ativada*/
     if(execute && !fastExecuteFlag){
         pathfindStep();
-    }
-
-
-    var totalNodesCount = 0;
-
-    if(showFlag){
-        for(i = 0; i < cols; i++){
-            for(var j = 0; j < rows; j++){
-                grid[i][j].show();
-
-                if(!grid[i][j].wall){
-                    totalNodesCount += 1;
-                }
-            }
-        }
     }
 
     var closedSetLen = closeSet.length;
@@ -115,17 +197,21 @@ function draw() {
         openedHtml += formatItemForColumn(openSet[i]);
     }
 
-    var countPathCost = 0;
-    var pathLenValue = path.length;
-    for(i = 0; i < pathLenValue; i++){
-        path[i].showPath(color(49, 0, 198));
+    showMap();
 
-        countPathCost += path[i].difficulty + path[i].risk + 1;
+    var countPathCost = end.f;
+    var pathLenValue = path.length;
+    
+    for(i = 0; i < pathLenValue; i++){
+        if((i == calcPathBlinkIndex()) && !execute ){
+            path[i].showPath(color(0, 119, 255));
+        }else{
+            path[i].showPath(color(49, 0, 198));
+        }
+        //countPathCost += path[i].f;
         pathHtml += formatItemForColumn(path[i]);
     }
-
-    start.show();
-
+    
     stepsText.html('<strong>Passos: </strong>' + stepsCount);
 
     pathLen.html("<strong>Tamanho do caminho: </strong>" + path.length);
@@ -140,6 +226,17 @@ function draw() {
     closedNodesLog.html(closedHtml);
     openedNodesLog.html(openedHtml);
     pathNodesLog.html(pathHtml);
+}
+
+var pathBlinkN = -1;
+var tempCount = 0;
+var times = 5;
+function calcPathBlinkIndex() {
+    if(tempCount % (path.length * times) == 0){
+        pathBlinkN = floor((pathBlinkN + 1) % path.length);
+    }
+    tempCount++;
+    return pathBlinkN;
 }
 
 function configsChanged() {
@@ -207,15 +304,16 @@ function formatItemForColumn(elem) {
 
 
 /*Função para definir os vizinhos de cada nó*/
-function calculateNeigbours() {
+function calculateNeigbours(isDiagonal) {
     for(var i = 0; i < cols; i++){
         for(var j = 0; j < rows; j++){
-            grid[i][j].addNeibors(grid, allowDiagonalMovement);
+            grid[i][j].addNeibors(grid, isDiagonal);
         }
     }
 }
 
 function fastExecute() {
+    noLoop();
     runStatus.html('<strong>Status: </strong> executando rapidamente...');
     fastExecuteFlag = true;
     begin();
@@ -224,6 +322,7 @@ function fastExecute() {
         pathfindStep();
     }
     fastExecuteFlag = false;
+    loop();
 }
 
 function stepExecute() {
@@ -268,10 +367,10 @@ function reset() {
     closedNodesText.html('<strong>Nós fechados:</strong> 0');
     totalNodes.html('<strong>Nós totais:</strong> 0');
 
-    randomObstaclePercentageText.html('<strong>Chance de um nó ser água:</strong> 0% (x100)');
-    groupObstacleText.html('<strong>Chance de água em grupos:</strong> 0% (x100)');
-    allowDiagonalMovementText.html('<strong>Permitir movimento na diagonal:</strong> sim');
-    distanceMethodText.html('<strong>Método de cálculo de distância:</strong> Euclidiana');
+    //randomObstaclePercentageText.html('<strong>Chance de um nó ser água:</strong> 0% (x100)');
+    //groupObstacleText.html('<strong>Chance de água em grupos:</strong> 0% (x100)');
+    //allowDiagonalMovementText.html('<strong>Permitir movimento na diagonal:</strong> sim');
+    //distanceMethodText.html('<strong>Método de cálculo de distância:</strong> Euclidiana');
 
     if(size > 3 && size <= 300){
         cols = size;
@@ -298,7 +397,7 @@ function reset() {
         treeNet = new MyTreeNetwork();
     }
     treeNet.deleteNetwork();
-    //treeNet.createNetwork(treeContainerName);
+    treeNet.createNetwork(treeContainerName);
     treeNet.addFirstNodeWithId(getIdFrom(start), formatNetElemText(start), "rgb(255, 55, 55)", start.f);
 
     wWeight = wValueInput.value();

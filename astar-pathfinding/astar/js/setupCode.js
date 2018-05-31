@@ -153,14 +153,12 @@ var choosenDistanceMethod = distanceHeuristicTypes[1];
 function setup() {
 
     var mycanvas = createCanvas(600, 600);
+    background(0);
     mycanvas.parent("leftSection");
     mycanvas.mouseOut(mouseIsNotOverSquare);
-    //mycanvas.parent("canvasContainer");
 
     w = width/cols;
     h = height/rows;
-
-    generateGrid();
 
 
     //INPUTS NA ÁREA DE CONFIGURAÇÕES
@@ -168,10 +166,12 @@ function setup() {
     inputSize = createInput("60", "number");
     createP("Tamanho do grid:").parent("configuration");
     inputSize.parent("configuration");
+    inputSize.changed(reset);
 
     createP("Semente para a geração do mapa:").parent("configuration");
     randomSeedInput = createInput(ceil(random(0, 200)), "number");
     randomSeedInput.parent("configuration");
+    randomSeedInput.changed(reset);
 
     var buttonRandomize = createButton('🔀 Randomizar');
     buttonRandomize.parent("configuration");
@@ -182,11 +182,13 @@ function setup() {
     randomObstaclePercentageSlider = createSlider(0,1, 0, 0.1);//min, max, value, step
     randomObstaclePercentageText.parent('configuration2');
     randomObstaclePercentageSlider.parent('configuration2');
+    randomObstaclePercentageSlider.changed(reset);
 
     groupObstacleText = createP('<strong>Chance de água em grupos:</strong> 0%');
     groupObstacleSlider = createSlider(0,1, 0.5, 0.1);//min, max, value, step
     groupObstacleText.parent('configuration2');
     groupObstacleSlider.parent('configuration2');
+    groupObstacleSlider.changed(reset);
 
     allowDiagonalMovementText = createP('<strong>Permitir movimento na diagonal:</strong> yes');
     allowDiagonalMovementRadio = createRadio('');
@@ -194,6 +196,7 @@ function setup() {
     allowDiagonalMovementRadio.option('Não   ', 0);
     allowDiagonalMovementText.parent('configuration2');
     allowDiagonalMovementRadio.parent('configuration2');
+    allowDiagonalMovementRadio.changed(reset);
 
     distanceMethodText = createP('<strong>Método de cálculo de distância:</strong> Manhattan');
     distanceMethodRadio = createRadio('');
@@ -201,6 +204,7 @@ function setup() {
     distanceMethodRadio.option('Manhattan   ', 1);
     distanceMethodText.parent('configuration2');
     distanceMethodRadio.parent('configuration2');
+    allowDiagonalMovementRadio.changed(reset);
 
 
     randomObstaclePercentageSlider.input(configsChanged);
@@ -342,7 +346,6 @@ function setup() {
     mouseOverText.parent(divTextAboutNode);
 
     // CHAMANDO FUNÇÃO DE RESET
-
 
     reset();
 }
