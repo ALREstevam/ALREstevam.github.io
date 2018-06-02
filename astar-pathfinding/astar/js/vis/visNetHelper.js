@@ -10,9 +10,8 @@ function MyTreeNetwork() {
     this.nodes = new vis.DataSet([]);
     this.edges = new vis.DataSet([]);
 
-    this.lazyNodes = new vis.DataSet([]);
-    this.lazyEdges = new vis.DataSet([]);
-    
+    this.lazyNodes = [];
+    this.lazyEdges = [];
     
     this.data = {
         nodes: this.nodes,
@@ -37,28 +36,33 @@ function MyTreeNetwork() {
             hierarchical: {
                 direction: 'UD',
                 nodeSpacing: 200,
-                levelSeparation: 200,
+                levelSeparation: 200
             }
         },
         physics:false
     };
 
-    this.addNodeWithId = function(nodeid, nodeLabel, arrowLabel, parentId, color) {
-        var level =  this.lazyNodes.get(parentId)['level'] + 1;
-        if(color){
-            this.lazyNodes.add({id: nodeid, label: nodeLabel, 'level': level, 'color': color});
-        }else{
-            this.lazyNodes.add({id: nodeid, label: nodeLabel, 'level': level});
+    this.addNodeWithId = function(nodeid, nodeLabel, arrowLabel, parentId, realNode) {
+        //var level =  this.lazyNodes.get(parentId)['level'] + 1;
+        var level = 0;
+
+        for(var i = 0; i < this.lazyNodes.length; i++){
+            if(this.lazyNodes[i].id == parentId){
+                level = this.lazyNodes[i].level + 1;
+            }
         }
-        this.lazyEdges.add({from: parentId, to: nodeid, arrows:'to', 'label': arrowLabel});
+
+        var lnode = {id: nodeid, label: nodeLabel, level: level, node: realNode};
+        var ledge = {from: parentId, to: nodeid, arrows:'to', label: arrowLabel};
+
+        this.lazyNodes.push(lnode);
+        this.lazyEdges.push(ledge);
     };
 
-    this.addFirstNodeWithId = function(nodeId, nodeLabel, color) {
-        if(color){
-            this.lazyNodes.add({id: nodeId, label: nodeLabel, 'level': 0, 'color': color});
-        }else{
-            this.lazyNodes.add({id: nodeId, label: nodeLabel, 'level': 0});
-        }
+
+    this.addFirstNodeWithId = function(nodeId, nodeLabel, realNode) {
+        var lnode = {id: nodeId, label: nodeLabel, level: 0, node: realNode};
+        this.lazyNodes.push( lnode );
     };
 
     this.createNetwork = function (containterID) {
@@ -72,13 +76,41 @@ function MyTreeNetwork() {
         this.network = new vis.Network(container, this.data, this.options);
     };
 
-    this.commitNetwork = function () {
-        this.nodes = deepcopy(this.lazyNodes);
+    this.commitNetwork = function (aPath, aStart, aEnd) {
+        var i;
 
-        
+        for(i = 0; i < this.lazyNodes.length; i++){
+            var tempinfo = this.lazyNodes[i];
+
+            if(tempinfo['node'] == aStart)
+            {
+                tempinfo.color = '#ff0000';
+            }
+            else if(tempinfo['node'] == aEnd)
+            {
+                tempinfo.color = '#00ff00';
+            }
+            else if(aPath.includes(tempinfo['node']))
+            {
+                var hasChild = false;
 
 
-        this.edges = deepcopy(this.lazyEdges);
+                for(var j = 0; j < this.lazyEdges.length; j++){
+                    if(tempinfo.id == this.lazyEdges[j].from){
+                        hasChild = true;
+                        break;
+                    }
+                }
+
+                if(hasChild){
+                    tempinfo.color = '#0000ff';
+                }
+            }
+            this.nodes.add(tempinfo);
+        }
+        for(i = 0; i < this.lazyEdges.length; i++){
+            this.edges.add(this.lazyEdges[i]);
+        }
     };
     
     
@@ -92,8 +124,8 @@ function MyTreeNetwork() {
         this.network = undefined;
         this.nodes = new vis.DataSet([]);
         this.edges = new vis.DataSet([]);
-        this.lazyEdges = new vis.DataSet([]);
-        this.lazyNodes = new vis.DataSet([]);
+        this.lazyEdges = new Array();
+        this.lazyNodes = new Array();
     };
 
 }

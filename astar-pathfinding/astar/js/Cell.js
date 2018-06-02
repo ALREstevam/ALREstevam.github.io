@@ -205,7 +205,7 @@ Cell.prototype.show = function () {
         //r = (this.risk * 5) + 50;
         r = 234;
         //g = ((this.risk * 5) + 50)/2;
-        g = map(this.risk, 10, initialRisk, 0, 255);
+        g = map(this.risk, 10, initialRisk, 0, 255) + ceil(random(-20, +10));
         b = 0;
     }
     else{

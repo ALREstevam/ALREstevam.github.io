@@ -398,7 +398,7 @@ function reset() {
     }
     treeNet.deleteNetwork();
     treeNet.createNetwork(treeContainerName);
-    treeNet.addFirstNodeWithId(getIdFrom(start), formatNetElemText(start), "rgb(255, 55, 55)", start.f);
+    treeNet.addFirstNodeWithId(getIdFrom(start), formatNetElemText(start), start);
 
     wWeight = wValueInput.value();
     xWeight = xValueInput.value();
@@ -410,7 +410,7 @@ function showTreeNetwork(){
     if(treeNet == undefined){
         treeNet = new MyTreeNetwork();
     }
-    treeNet.commitNetwork();
+    treeNet.commitNetwork(path, start, end);
     treeNet.createNetwork(treeContainerName);
 }
 

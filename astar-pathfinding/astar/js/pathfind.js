@@ -130,13 +130,7 @@ function pathfindStep() {
                 }
 
                 //Adicionando objetos temporários à árvore que poderá ser gerada
-                if(neighbour == end) {
-                    //Se for o nó final terá uma cor diferenciada
-                    treeNet.addNodeWithId(formatNetElemId(neighbour), formatNetElemText(neighbour), formatArrowText(neighbour), getIdFrom(current), '#ffc107');
-                }else{
-                    treeNet.addNodeWithId(formatNetElemId(neighbour), formatNetElemText(neighbour), formatArrowText(neighbour), getIdFrom(current));
-                }
-
+                treeNet.addNodeWithId(formatNetElemId(neighbour), formatNetElemText(neighbour), formatArrowText(neighbour), getIdFrom(current), neighbour);
             }
 
 
