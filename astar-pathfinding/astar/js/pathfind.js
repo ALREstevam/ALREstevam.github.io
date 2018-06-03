@@ -63,7 +63,7 @@ function pathfindStep() {
             /*Se o custo desse nó for menor que o custo do nó final pode ser que exista um caminho ainda melhor
             e então devo continuar procurando, o nó final é mantido na lista de nós abertos
             */
-            if(openSet[lowIndex2].f > current.f){
+            if(openSet[lowIndex2].f >= current.f){
 
 
                 /*removeFromArray(openSet, current);
@@ -72,8 +72,6 @@ function pathfindStep() {
 
                 runStatus.html('<strong>Status: </strong> caminho encontrado.');//Mudar o texto de status
                 console.log("DONE!");//Colocar uma mensagem no terminal
-                execute = false;//Dizendo que algoritmo pode parar de ser executado
-
 
                 //Definindo o vetor para desenhar o caminho
                 path = [];
@@ -83,6 +81,7 @@ function pathfindStep() {
                     path.push(temp.previous);
                     temp = temp.previous;
                 }
+                execute = false;//Dizendo que algoritmo pode parar de ser executado
                 return;
             }
         }
@@ -97,7 +96,7 @@ function pathfindStep() {
             //Caso o vizinho em questão não esteja fechado e não seja uma barreira então deve ser levado em consideração
             if(!closeSet.includes(neighbour) && !neighbour.wall){
                 //Cálculo de um g(n) temporário para o vizinho em questão
-                var tempg = 1 + current.g +  (yWeight * neighbour.difficulty) + (zWeight * neighbour.risk);
+                var tempg = (current.g +  (yWeight * neighbour.difficulty) + (zWeight * neighbour.risk));
 
                 /*Obs.: o vizinho pode ser um nó já aberto, portanto tem um valor de g ou um nó não aberto e tem que
                 receber um valor de g
@@ -123,8 +122,8 @@ function pathfindStep() {
                 //Se existe um novo caminho feito
                 if(newPath){
                     //Cálculo da heurística
-                    neighbour.h = xWeight * heuristic(neighbour, end, choosenDistanceMethod);//cálculo do h
-                    neighbour.f = (wWeight * neighbour.g) + neighbour.h;//cálculo do f
+                    neighbour.h = parseFloat((xWeight * heuristic(neighbour, end, choosenDistanceMethod)).toFixed(4));//cálculo do h
+                    neighbour.f = parseFloat(( (1 + (wWeight * neighbour.g) + neighbour.h) ).toFixed(4));//cálculo do f
                     //g já foi caculado!
                     neighbour.previous = current;//dizendo para o nó quem é seu antecessor (assim é possível recuperar o caminho)
                 }
@@ -148,10 +147,9 @@ function pathfindStep() {
     }
     else{//Não existem nós abertos, portanto não é possível continuar
         //NÃO EXISTE SOLUÇÃO
-
         console.log('No solution');//Esvrevendo no terminal
         runStatus.html('<strong>Status: </strong> sem solução.');//Definindo o texto de status
         execute = false;//Dizendo que não é preciso chamar a função novamente
-        //return;
+        return;
     }
 }

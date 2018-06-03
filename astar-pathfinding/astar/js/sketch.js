@@ -199,7 +199,7 @@ function draw() {
 
     showMap();
 
-    var countPathCost = end.f;
+    var countPathCost = 0;
     var pathLenValue = path.length;
     
     for(i = 0; i < pathLenValue; i++){
@@ -208,7 +208,7 @@ function draw() {
         }else{
             path[i].showPath(color(49, 0, 198));
         }
-        //countPathCost += path[i].f;
+        countPathCost += path[i].difficulty + path[i].risk;
         pathHtml += formatItemForColumn(path[i]);
     }
     

@@ -43,8 +43,8 @@
       <file leaf-file-name="util.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/astar/js/myUtils/util.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
+            <state relative-caret-position="204">
+              <caret line="22" column="24" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -53,7 +53,7 @@
       <file leaf-file-name="setupCode.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/astar/js/setupCode.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
+            <state relative-caret-position="357">
               <caret line="342" column="109" selection-start-line="342" selection-start-column="106" selection-end-line="342" selection-end-column="109" />
               <folding>
                 <element signature="e#0#42#0" expanded="false" />
@@ -75,18 +75,18 @@
       <file leaf-file-name="sketch.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/astar/js/sketch.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="420" column="24" selection-start-line="420" selection-start-column="9" selection-end-line="420" selection-end-column="24" />
+            <state relative-caret-position="204">
+              <caret line="210" column="58" selection-start-line="210" selection-start-column="58" selection-end-line="210" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="visNetHelper.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="visNetHelper.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/astar/js/vis/visNetHelper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="98" column="60" selection-start-line="98" selection-start-column="60" selection-end-line="98" selection-end-column="60" />
+            <state relative-caret-position="244">
+              <caret line="93" column="41" selection-start-line="93" selection-start-column="41" selection-end-line="93" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -102,11 +102,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pathfind.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pathfind.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/astar/js/pathfind.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="132" column="32" selection-start-line="132" selection-start-column="32" selection-end-line="132" selection-end-column="32" />
+            <state relative-caret-position="408">
+              <caret line="125" column="103" selection-start-line="125" selection-start-column="103" selection-end-line="125" selection-end-column="103" />
               <folding />
             </state>
           </provider>
@@ -150,10 +150,10 @@
         <option value="$PROJECT_DIR$/astar/js/setupCode.js" />
         <option value="$PROJECT_DIR$/astar/css/stylesheet.css" />
         <option value="$PROJECT_DIR$/astar/index.html" />
-        <option value="$PROJECT_DIR$/astar/js/pathfind.js" />
-        <option value="$PROJECT_DIR$/astar/js/sketch.js" />
         <option value="$PROJECT_DIR$/astar/js/Cell.js" />
         <option value="$PROJECT_DIR$/astar/js/vis/visNetHelper.js" />
+        <option value="$PROJECT_DIR$/astar/js/sketch.js" />
+        <option value="$PROJECT_DIR$/astar/js/pathfind.js" />
       </list>
     </option>
   </component>
@@ -290,12 +290,12 @@
       <workItem from="1526931112313" duration="113341000" />
       <workItem from="1527515028276" duration="2334000" />
       <workItem from="1527535798576" duration="5649000" />
-      <workItem from="1527548872010" duration="47417000" />
+      <workItem from="1527548872010" duration="55179000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="220881000" />
+    <option name="totallyTimeSpent" value="228643000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -736,17 +736,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/astar/css/stylesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="142" column="14" selection-start-line="142" selection-start-column="14" selection-end-line="142" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/astar/js/vis/visNetHelper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="93" column="41" selection-start-line="93" selection-start-column="41" selection-end-line="93" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/astar/js/myUtils/util.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
+        <state relative-caret-position="204">
+          <caret line="22" column="24" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/astar/js/setupCode.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
+        <state relative-caret-position="357">
           <caret line="342" column="109" selection-start-line="342" selection-start-column="106" selection-end-line="342" selection-end-column="109" />
           <folding>
             <element signature="e#0#42#0" expanded="false" />
@@ -762,34 +778,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/astar/js/pathfind.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="132" column="32" selection-start-line="132" selection-start-column="32" selection-end-line="132" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/astar/css/stylesheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="142" column="14" selection-start-line="142" selection-start-column="14" selection-end-line="142" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/astar/js/sketch.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="420" column="24" selection-start-line="420" selection-start-column="9" selection-end-line="420" selection-end-column="24" />
+        <state relative-caret-position="204">
+          <caret line="210" column="58" selection-start-line="210" selection-start-column="58" selection-end-line="210" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/astar/js/vis/visNetHelper.js">
+    <entry file="file://$PROJECT_DIR$/astar/js/pathfind.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="98" column="60" selection-start-line="98" selection-start-column="60" selection-end-line="98" selection-end-column="60" />
+        <state relative-caret-position="408">
+          <caret line="125" column="103" selection-start-line="125" selection-start-column="103" selection-end-line="125" selection-end-column="103" />
           <folding />
         </state>
       </provider>

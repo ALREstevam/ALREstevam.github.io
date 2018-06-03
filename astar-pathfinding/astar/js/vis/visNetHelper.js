@@ -42,13 +42,20 @@ function MyTreeNetwork() {
         physics:false
     };
 
+
+    this.nodesLevelHashMap = new Array();
+
+
     this.addNodeWithId = function(nodeid, nodeLabel, arrowLabel, parentId, realNode) {
         //var level =  this.lazyNodes.get(parentId)['level'] + 1;
-        var level = 0;
+        var level = undefined;
+        level = this.nodesLevelHashMap[parentId + '*'] + 1;
 
-        for(var i = 0; i < this.lazyNodes.length; i++){
-            if(this.lazyNodes[i].id == parentId){
-                level = this.lazyNodes[i].level + 1;
+        if(level == undefined){
+            for(var i = this.lazyNodes.length -1; i >= 0; i--){
+                if(this.lazyNodes[i].id == parentId){
+                    level = this.lazyNodes[i].level + 1;
+                }
             }
         }
 
@@ -57,32 +64,45 @@ function MyTreeNetwork() {
 
         this.lazyNodes.push(lnode);
         this.lazyEdges.push(ledge);
+
+        this.nodesLevelHashMap[nodeid + '*'] = level;
     };
 
 
     this.addFirstNodeWithId = function(nodeId, nodeLabel, realNode) {
         var lnode = {id: nodeId, label: nodeLabel, level: 0, node: realNode};
         this.lazyNodes.push( lnode );
+        this.nodesLevelHashMap[nodeId + '*'] = 0;
     };
 
     this.createNetwork = function (containterID) {
+        print('Creating network...');
+
         this.data = {
             nodes: this.nodes,
             edges: this.edges
         };
 
-        console.log('Creating network!');
         var container = document.getElementById(containterID);
         this.network = new vis.Network(container, this.data, this.options);
+
+        print('Network created.');
     };
 
     this.commitNetwork = function (aPath, aStart, aEnd) {
-        var i;
+        this.nodes = new vis.DataSet([]);
+        this.edges = new vis.DataSet([]);
 
-        for(i = 0; i < this.lazyNodes.length; i++){
+        print('Committing network...');
+        var i;
+        var lazyNodesLen = this.lazyNodes.length;
+
+        print('Committing nodes');
+        for(i = 0; i < lazyNodesLen; i++){
+
             var tempinfo = this.lazyNodes[i];
 
-            if(tempinfo['node'] == aStart)
+            if(tempinfo.node == aStart)
             {
                 tempinfo.color = '#ff0000';
             }
@@ -93,24 +113,25 @@ function MyTreeNetwork() {
             else if(aPath.includes(tempinfo['node']))
             {
                 var hasChild = false;
-
-
                 for(var j = 0; j < this.lazyEdges.length; j++){
                     if(tempinfo.id == this.lazyEdges[j].from){
                         hasChild = true;
                         break;
                     }
                 }
-
                 if(hasChild){
                     tempinfo.color = '#0000ff';
                 }
             }
             this.nodes.add(tempinfo);
         }
-        for(i = 0; i < this.lazyEdges.length; i++){
+
+        print('Committing edges');
+        var lazyEdgesLen = this.lazyEdges.length;
+        for(i = 0; i < lazyEdgesLen; i++){
             this.edges.add(this.lazyEdges[i]);
         }
+        print('Network commited.');
     };
     
     
