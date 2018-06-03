@@ -3,14 +3,16 @@
  */
 /*Definção do objeto que representa cada célula do grid / nó do grafo*/
 
-var bestPathDifficultyImportance = 0.1;
+var bestPathDifficultyImportance = 0.2;
 var perlincount = 0;
+
 
 
 function Cell(xpos, ypos){
     this.f = 0;
     this.g = 0;
     this.h = 0;
+
     this.x = xpos;
     this.y = ypos;
     this.mark = false;
@@ -19,7 +21,7 @@ function Cell(xpos, ypos){
     this.wall = random(1) < randomWallPercentage;
     this.supereasy = false;
     this.risk = 0;
-    this.difficulty =  0.1;
+    this.difficulty =  undefined;
     this.inClosedSet = false;
     this.inOpenSet = false;
     this.mycolor = color(0, 0, 0);
@@ -76,7 +78,7 @@ Cell.prototype.addNeibors = function (grd, isDiagonal) {
     }
 };
 
-Cell.prototype.noSetRisk = function (maxIterations, currentIteration) {
+/*Cell.prototype.noSetRisk = function (maxIterations, currentIteration) {
     var tempArr = shuffleArr(this.neighbors);
     for(var i = 0; i < tempArr.length; i++){
         if(!tempArr[i].wall && currentIteration < maxIterations){
@@ -84,7 +86,7 @@ Cell.prototype.noSetRisk = function (maxIterations, currentIteration) {
             this.risk = floor(random(50, heuristic(start, end)/5));
         }
     }
-};
+};*/
 
 var initialRisk = 200;
 Cell.prototype.setRisk = function (maxIterations, currentIteration, nextRisk) {
@@ -120,52 +122,51 @@ Cell.prototype.setRisk = function (maxIterations, currentIteration, nextRisk) {
 
 /*Função que gera o mapa*/
 Cell.prototype.setDifficulty = function (initialDif) {
-    var sumAmount;
-
-    if(allowDiagonalMovement){
-        sumAmount = random(0.1, 0.7);
-    }else{
-        sumAmount = random(0.7);
-    }
-
-    var maxValue = floor(abs(heuristic(start, end, choosenDistanceMethod)/3));
+    var sumAmount, i;
+    sumAmount = random(0.1, 0.7);
+    var maxValue = calculateMaxDifficulty();
     this.difficulty = floor(initialDif);
-
     var tempArr = shuffleArr(this.neighbors);
 
+
+    //Wall
+    if(this.difficulty > maxValue - floor(difficultPathToWallAmount * 100) * bestPathDifficultyImportance){
+        this.wall = true;
+        this.difficulty = 0;
+    }
+
+    //Common
+    if(this.difficulty > maxValue - floor(difficultPathToWallAmount * 100)/3){
+        this.difficulty += 20;
+    }
+
+    //Supereasy
+    if(this.difficulty < maxValue - (maxValue * 0.8) && !this.wall){
+        this.supereasy = true;
+        this.difficulty = 2;
+    }
+    //Detect beach
+    else{
+        for(i = 0; i < this.neighbors.length; i++){
+            if(this.neighbors[i].wall && !this.wall){
+                this.supereasy = true;
+                this.difficulty = 3;
+                break;
+            }
+        }
+
+
+    }
+
+    //Recursive call
     for(i = 0; i < tempArr.length; i++){
         if(!tempArr[i].mark && !tempArr[i].wall){
             tempArr[i].mark = true;
-            tempArr[i].setDifficulty(   floor((initialDif + sumAmount) % maxValue) + 1   );
-
-            if(this.difficulty <= 0){
-                this.difficulty = 1;
-            }
-
-            if(this.difficulty > maxValue - floor(difficultPathToWallAmount * 100) * bestPathDifficultyImportance){
-                this.wall = true;
-            }
-
-            if(this.difficulty > maxValue - floor(difficultPathToWallAmount * 100)/3){
-                this.difficulty += 20;
-            }
-
-            if(this.difficulty < maxValue - (maxValue * 0.8) && !this.wall){
-                this.supereasy = true;
-                this.difficulty = 1;
-            }
-            else{
-                for(var i = 0; i < this.neighbors.length -1; i++){
-                    if(this.neighbors[i].wall && !this.wall){
-                        this.supereasy = true;
-                        this.difficulty = 1;
-                        break;
-                    }
-                }
-            }
+            tempArr[i].setDifficulty(   floor((initialDif + sumAmount) % maxValue) + 1  );
         }
     }
-    this.difficulty = parseFloat((this.difficulty/7).toFixed(2));
+
+    this.difficulty = floor(this.difficulty/2);
 };
 
 
@@ -192,26 +193,35 @@ Cell.prototype.show = function () {
     }
     else if(this.wall){
         //Wall
+
+        var countTerrain = 0;
+        for(var i = 0; i < this.neighbors.length; i++){
+            if(!this.neighbors[i].wall){
+                countTerrain ++;
+            }
+        }
+
         r = 2;
-        g = 204;
-        b = 200 + (10 * noise(perlincount));
+        g = map(countTerrain, 0, 8, 220, 255);
+        b = map(countTerrain, 0, 8, 180, 255);
         perlincount += 0.1;
+        b += (20 * noise(perlincount));
+
     }else if(this.supereasy){
         //Supereasy cell
         r = 56;
         g = 255;
         b = 66;
     }else if(this.risk > 0){
-        //r = (this.risk * 5) + 50;
         r = 234;
-        //g = ((this.risk * 5) + 50)/2;
         g = map(this.risk, 10, initialRisk, 0, 255) + ceil(random(-20, +10));
         b = 0;
     }
     else{
         //Normal cell
         r = 32;
-        g = 255 - ((this.difficulty * 3) / bestPathDifficultyImportance);
+        //g = 255 - ((this.difficulty * 3) / bestPathDifficultyImportance);
+        g = map(this.difficulty, 3, calculateMaxDifficulty(), 100, 255);
         b = 0;
     }
 
@@ -254,7 +264,7 @@ Cell.prototype.showPath = function (clr) {
     }
 };
 
-Cell.prototype.roads = function (roadLen, previousNode, previousNodeIndex, roadTurnPercentage){
+Cell.prototype.beginRoad = function (roadLen, previousNode, previousNodeIndex, roadTurnPercentage){
 
     if(roadLen <= 0){
         return;
@@ -278,19 +288,27 @@ Cell.prototype.roads = function (roadLen, previousNode, previousNodeIndex, roadT
                     }
                 }
 
-                tempArr[i].roads(roadLen -1, this, indx, roadTurnPercentage);
+                tempArr[i].beginRoad(roadLen -1, this, indx, roadTurnPercentage);
                 return;
             }
         }
     }
-    else{
-        this.neighbors[previousNodeIndex].roads(roadLen -1, this, previousNodeIndex, roadTurnPercentage);
+    else{//Tentar continuar reto
+        var nextSquare = this.neighbors[previousNodeIndex];
+        if(typeof nextSquare === 'undefined') {//O vizinho não existe,nesse caso é preciso virar
+            nextSquare = this.neighbors[floor(random(0, this.neighbors.length -1))]
+        }
+        nextSquare.beginRoad(roadLen -1, this, previousNodeIndex, roadTurnPercentage);
     }
 };
 
 Cell.prototype.setRoad = function(){
-    this.difficulty = 0;
+    this.difficulty = 0.1;
     this.risk = 0;
     this.isRoad = true;
     this.wall = false;
 };
+
+function calculateMaxDifficulty() {
+    return floor(abs(heuristic(start, end, choosenDistanceMethod)/2));
+}

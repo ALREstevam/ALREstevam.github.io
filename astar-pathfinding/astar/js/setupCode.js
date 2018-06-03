@@ -33,7 +33,7 @@ function heuristic(a, b, distance) {
     var d;
     if(distance == distanceHeuristicTypes[0]){
         //Euclidean distance
-        d = dist(a.x, a.y, b.x, b.y);
+        d = floor(dist(a.x, a.y, b.x, b.y));
     }else{
         //Manhattan distance
         d = abs(a.x - b.x) + abs(a.y - b.y);
@@ -97,7 +97,8 @@ var openedNodesLog;
 var closedNodesLog;
 var pathNodesLog;
 var mouseOverText;
-
+var treeCreatedModal;
+var executionSavedModal;
 var divTextAboutNode;
 
 /*Flag: algoritmo está em execução*/
@@ -142,11 +143,15 @@ var difficultPathToWallAmount = 0.5;
  * distanceHeuristicTypes[0] :  distância Euclidiana
  * distanceHeuristicTypes[1] :  distância de Manhattan
  * */
-var choosenDistanceMethod = distanceHeuristicTypes[1];
+var choosenDistanceMethod = distanceHeuristicTypes[0];
 
 /*====================================================================================================================*/
 
-
+function updateHeuristic() {
+    closeModal('id01');
+    reset();
+    new MySimpleModal('heuristicUpdatedModal',  '<p>A heurística foi atualizada.</p>').create().open();
+}
 
 /*Função de setup do algoritmo*/
 
@@ -200,8 +205,8 @@ function setup() {
 
     distanceMethodText = createP('<strong>Método de cálculo de distância:</strong> Manhattan');
     distanceMethodRadio = createRadio('');
-    distanceMethodRadio.option('Euclidiana   ', 0).checked = true;
-    distanceMethodRadio.option('Manhattan   ', 1);
+    distanceMethodRadio.option('Euclidiana  ', 1).checked = true;
+    distanceMethodRadio.option('Manhattan   ', 2);
     distanceMethodText.parent('configuration2');
     distanceMethodRadio.parent('configuration2');
     allowDiagonalMovementRadio.changed(reset);
@@ -262,7 +267,9 @@ function setup() {
     var setHeuristicButton = createButton('Definir nova heurística');
     setHeuristicButton.parent('confirmBtn');
     setHeuristicButton.class('defaultButton redButton center');
-    setHeuristicButton.mousePressed(reset);
+    setHeuristicButton.mousePressed(updateHeuristic);
+
+    
     createP("<i>Redefinir a heurística irá apagar o caminho atual.<br>" +
         "A heurística só será redefinida usando este botão ou o botão \"reset\"." +
         "</i>").parent('confirmBtn');
@@ -327,6 +334,9 @@ function setup() {
     openedNodesText = createP('<strong>Nós abertos:</strong> 0');
     closedNodesText = createP('<strong>Nós fechados:</strong> 0');
     totalNodes = createP('<strong>Nós totais:</strong> 0');
+    var saveExecutionButton = createButton('Salvar execução');
+    saveExecutionButton.class("defaultButton greenButton");
+    saveExecutionButton.mousePressed(saveExecution);
 
     stepsText.parent("data");
     runStatus.parent("data");
@@ -335,6 +345,7 @@ function setup() {
     openedNodesText.parent("data");
     closedNodesText.parent("data");
     totalNodes.parent("data");
+    saveExecutionButton.parent("data");
 
 
     //TOOLTIP TEXT COM INFORMAÇÕES DO NÓ
@@ -345,8 +356,14 @@ function setup() {
     mouseOverText = createP('<strong>Mouse sob o nó: </strong> (x: ?, y: ?)');
     mouseOverText.parent(divTextAboutNode);
 
-    // CHAMANDO FUNÇÃO DE RESET
+    //CRIANDO ALGUNS MODAIS SIMPLES
 
+
+    treeCreatedModal = new MySimpleModal('treeCreatedModal',  '<p>A árvore foi criada.</p>').create();
+    executionSavedModal = new MySimpleModal('executionSavedModal',  '<p>A execução foi salva, veja no fim da página.</p>').create();
+    
+    
+    // CHAMANDO FUNÇÃO DE RESET
     reset();
 }
 

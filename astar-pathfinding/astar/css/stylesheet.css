@@ -51,6 +51,12 @@ body {
     flex: 70%;
 }
 
+.topRight{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
 
 
 .defaultButton{
@@ -144,4 +150,10 @@ body {
 }
 
 .smallThumb span{
+}
+
+
+.listBox{
+    border:solid 1px grey;;
+    padding: 5px;
 }

@@ -7,7 +7,8 @@ function setVariables() {
     randomWallPercentage = randomObstaclePercentageSlider.value();
     allowDiagonalMovement = allowDiagonalMovementRadio.value() == 1;
     difficultPathToWallAmount = groupObstacleSlider.value();
-    choosenDistanceMethod = distanceHeuristicTypes[distanceMethodRadio.value()];
+
+    choosenDistanceMethod = distanceHeuristicTypes[parseInt(distanceMethodRadio.value()) - 1];
 }
 
 
@@ -50,11 +51,14 @@ function initMap() {
     
 
 
-    getRandomNode().roads(ceil(rows * 0.7), undefined, 0, random(0.2, 0.7));
-    getRandomNode().roads(ceil(rows * 0.7), undefined, 1, random(0.2, 0.7));
-    getRandomNode().roads(ceil(rows * 0.7), undefined, 2, random(0.2, 0.7));
-    getRandomNode().roads(ceil(rows * 0.7), undefined, 3, random(0.2, 0.7));
-    end.roads(ceil(rows * 0.7), undefined, 3, random(0.2, 0.7));
+    getRandomNode().beginRoad(ceil(rows * 0.7), undefined, 0, random(0.2, 0.7));
+    getRandomNode().beginRoad(ceil(rows * 0.7), undefined, 1, random(0.2, 0.7));
+    getRandomNode().beginRoad(ceil(rows * 0.7), undefined, 2, random(0.2, 0.7));
+    getRandomNode().beginRoad(ceil(rows * 0.7), undefined, 3, random(0.2, 0.7));
+    end.beginRoad(ceil(rows * 0.7), undefined, 3, random(0.2, 0.7));
+    end.beginRoad(ceil(rows * 0.7), undefined, 3, random(0.2, 0.7));
+    start.beginRoad(ceil(rows * 0.7), undefined, 3, random(0.2, 0.7));
+
 
 
     calculateNeigbours(allowDiagonalMovement);
@@ -92,7 +96,23 @@ function defineStartEndPoints() {
 }
 
 function defineDifficulty() {
-    end.setDifficulty(0.1);
+    end.setDifficulty(3);
+
+    var i, j;
+
+    for(i = 0; i < cols; i++){
+        for(j = 0; j < rows; j++){
+            var elem = grid[i][j];
+            if(elem.difficulty == undefined){
+                print('undefined difficulty found at x: ' + elem.x + ' y:'+ elem.y);
+                elem.setDifficulty(3);
+            }
+
+        }
+    }
+
+
+
 
     end.wall = false;
     start.wall = false;
@@ -140,10 +160,10 @@ function defineRiskAreas(){
 }
 
 function countTotalWalkableNodes() {
-    var i;
+    var i, j;
     var walkables = 0;
     for(i = 0; i < cols; i++){
-        for(var j = 0; j < rows; j++){
+        for(j = 0; j < rows; j++){
             if(!grid[i][j].wall){
                 walkables += 1;
             }
@@ -169,6 +189,7 @@ var totalNodesCount = 0;
 * dessa forma cada etapa do algoritmo será desenhada na tela*/
 
 
+var countPathCost = 0;
 
 function draw() {
     background(0);
@@ -199,7 +220,7 @@ function draw() {
 
     showMap();
 
-    var countPathCost = 0;
+    countPathCost = 0;
     var pathLenValue = path.length;
     
     for(i = 0; i < pathLenValue; i++){
@@ -208,12 +229,14 @@ function draw() {
         }else{
             path[i].showPath(color(49, 0, 198));
         }
-        countPathCost += path[i].difficulty + path[i].risk;
         pathHtml += formatItemForColumn(path[i]);
     }
-    
-    stepsText.html('<strong>Passos: </strong>' + stepsCount);
 
+
+
+    countPathCost = calcPathCost(path);
+
+    stepsText.html('<strong>Passos: </strong>' + stepsCount);
     pathLen.html("<strong>Tamanho do caminho: </strong>" + path.length);
     pathCost.html('<strong>Custo do caminho:</strong> ' + countPathCost);
 
@@ -228,6 +251,22 @@ function draw() {
     pathNodesLog.html(pathHtml);
 }
 
+function calcPathCost(arr) {
+
+    var cost = 0;
+    //countPathCost += 1 + path[i].difficulty + path[i].risk +
+
+    var i;
+    var pathLenValue = arr.length;
+
+    for(i = 0; i < pathLenValue; i++){
+        var nodeElem = arr[i];
+        cost += 1 + nodeElem.difficulty + nodeElem.risk /*+ heuristic(path[i], end, choosenDistanceMethod)*/;
+    }
+
+    return cost;
+}
+
 var pathBlinkN = -1;
 var tempCount = 0;
 var times = 5;
@@ -240,44 +279,51 @@ function calcPathBlinkIndex() {
 }
 
 function configsChanged() {
+
     randomObstaclePercentageText.html('<strong>Chance de um nó ser água:</strong> ' + randomObstaclePercentageSlider.value() + "\% (x100)");
     groupObstacleText.html('<strong>Chance de água em grupos:</strong> ' + groupObstacleSlider.value() + '\% (x100)');
     allowDiagonalMovementText.html('<strong>Permitir movimento na diagonal:</strong> ' + (allowDiagonalMovementRadio.value() == 1 ? "sim" : "não"));
-    distanceMethodText.html('<strong>Método de cálculo de distância:</strong>  ' + (distanceMethodRadio.value() == 1 ? "Manhattan" : "Euclidiana"));
+    distanceMethodText.html('<strong>Método de cálculo de distância:</strong>  ' + (distanceMethodRadio.value() == 2 ? "Manhattan" : "Euclidiana"));
 
+    setVariables();
 }
-function changeHeuristicFormulaView(){
-    var formulaHtml = "<span class='formula'>f(n) =1 + w * (y * dif(n) + z * rsk(n)) + x *(h(n))</span><br>";
-    formulaHtml += "<span class='formula'>f(n) = 1";
 
+
+function generateHeuristicFormula() {
+    var formula = "f(n) = 1";
     if(wValueInput.value() != 0 && (yValueInput.value() != 0 || zValueInput.value() != 0)){
-        formulaHtml += ' + ';
-        formulaHtml +=  wValueInput.value() + " * ( ";
+        formula += ' + ';
+        formula +=  wValueInput.value() + " * ( ";
         if(yValueInput.value() != 0){
-            formulaHtml += yValueInput.value() + " * dif(n)";
+            formula += yValueInput.value() + " * dif(n)";
         }
 
         if(yValueInput.value() != 0 && zValueInput.value() != 0){
-            formulaHtml += " + ";
+            formula += " + ";
         }
 
         if(zValueInput.value() != 0){
-            formulaHtml += zValueInput.value() + " * rsk(n)";
+            formula += zValueInput.value() + " * rsk(n)";
         }
-        formulaHtml += " ) ";
+        formula += " ) ";
 
         if(xValueInput.value() != 0){
-            formulaHtml += " + ";
+            formula += " + ";
         }
     }else{
         if(xValueInput.value() != 0){
-            formulaHtml += ' + ';
+            formula += ' + ';
         }
     }
     if(xValueInput.value() != 0){
-        formulaHtml += " " + xValueInput.value() + " * (h(n))";
+        formula += " " + xValueInput.value() + " * (h(n))";
     }
-    formulaHtml += "</span>";
+    return formula;
+}
+
+function changeHeuristicFormulaView(){
+    var formulaHtml = "<span class='formula'>f(n) =1 + w * (y * dif(n) + z * rsk(n)) + x *(h(n))</span><br>";
+    formulaHtml += "<span class='formula'>"+ generateHeuristicFormula() +"</span>";
 
     //f(n) = 1 + w * (y * dif(n) + z * rsk(n)) + x *(h(n))
 
@@ -354,7 +400,14 @@ var treeNet = undefined;
 var treeContainerName = 'mynetwork';
 
 /*Função que limpa as estruturas de dados geradas e prepara uma nova execução*/
+
+
+
+
+
+
 function reset() {
+    print('\n\n--------------------RESETING--------------------\n\n');
     grid = null;
 
     var size = inputSize.value();
@@ -412,6 +465,8 @@ function showTreeNetwork(){
     }
     treeNet.commitNetwork(path, start, end);
     treeNet.createNetwork(treeContainerName);
+
+    treeCreatedModal.open();
 }
 
 function showSubtitleModal() {
@@ -461,14 +516,20 @@ function mouseIsOverSquare(element){
     }else if(element.wall) {
         htmlVal += '<br><strong>Tipo:</strong> água';
     }else if(element.isRoad){
-        htmlVal += '<br><strong>Tipo:</strong> trilha/pista';
+        htmlVal += '<br><strong>Tipo:</strong> trilha';
     }else{
         htmlVal += '<br><strong>Tipo:</strong> floresta';
+    }
+
+    if(element.supereasy && element != end && element != start && !element.wall){
+        htmlVal += " descampada";
     }
 
     if(element.risk > 0){
         htmlVal += " com risco";
     }
+
+
 
 
     if(element.wall){
@@ -512,4 +573,74 @@ function mouseIsOverSquare(element){
 
 function mouseIsNotOverSquare() {
     divTextAboutNode.style('visibility: hidden;');
+}
+
+
+function saveExecution() {
+
+    //savedExecutions
+    var execDiv = createDiv();
+    execDiv.parent("savedExecutions");
+    execDiv.class('listBox');
+    execDiv.style('position: relative;');
+
+    var rowDiv = createDiv();
+    rowDiv.parent(execDiv);
+    rowDiv.class('row');
+
+    var colDiv1 = createDiv();
+    colDiv1.parent(rowDiv);
+    colDiv1.class('columnSmall');
+
+    var colDiv2 = createDiv();
+    colDiv2.parent(rowDiv);
+    colDiv2.class('columnLarge');
+    colDiv2.style('padding-left: 10px; line-height: 0.8;');
+
+    var imgdiv = createDiv();
+    imgdiv.parent(colDiv1);
+
+    var deleteSavedBtn = createElement("span", "&times;");
+    deleteSavedBtn.parent(execDiv);
+    deleteSavedBtn.class('w3-button topRight');
+    deleteSavedBtn.mouseClicked(function () {
+        execDiv.style('display:none;');
+    });
+
+
+
+    //<span onclick="closeModal('id01')"class=""></span>
+
+    //saveFrames(filename, extension, duration, framerate, [callback])
+    saveFrames('out'+ceil(millis()), 'png', 1, 1, function(data) {
+
+        var img = data[0]['imageData'];
+
+        var imgHtml = createImg(img);
+        imgHtml.width = 50;
+
+        imgHtml.parent(imgdiv);
+        imgHtml.style('width: 100%; height 100%;');
+
+    });
+
+    createP("<strong>Fórmula: </strong><span class='formula'>"+ generateHeuristicFormula() +"</span>").parent(colDiv2);
+    createP("<strong>Tamanho do grid: </strong>"+ rows + " x " + cols).parent(colDiv2);
+    createP("<strong>Semente para a geração do mapa: </strong>" + randomSeedInput.value()).parent(colDiv2);
+    createP('<strong>Chance de um nó ser água:</strong> ' + randomObstaclePercentageSlider.value() + "\% (x100)").parent(colDiv2);
+    createP('<strong>Chance de água em grupos:</strong> ' + groupObstacleSlider.value() + '\% (x100)').parent(colDiv2);
+    createP('<strong>Permitir movimento na diagonal:</strong> ' + (allowDiagonalMovementRadio.value() == 1 ? "sim" : "não")).parent(colDiv2);
+    createP('<strong>Método de cálculo de distância:</strong>  ' + (distanceMethodRadio.value() == 2 ? "Manhattan" : "Euclidiana")).parent(colDiv2);
+    createP('<strong>Passos: </strong>' + stepsCount).parent(colDiv2);
+    createP("<strong>Tamanho do caminho: </strong>" + path.length).parent(colDiv2);
+    createP('<strong>Custo do caminho:</strong> ' + countPathCost).parent(colDiv2);
+    createP('<strong>Nós abertos:</strong> ' + openSet.length).parent(colDiv2);
+    createP('<strong>Nós fechados:</strong> ' + closeSet.length).parent(colDiv2);
+    createP('<strong>Nós totais:</strong> ' + totalNodesCount).parent(colDiv2);
+
+
+    executionSavedModal.open();
+
+
+
 }
