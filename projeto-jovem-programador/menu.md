@@ -19,6 +19,8 @@
 * [**Aula 5**](files/aulas/aula5.html)
   * [Arquivo: projeto na aula 5](files\projects\Aula5.c3p)
 * [**Aula 6**](files/aulas/aula6.html)
+  * [Links](files/aulas/links_aula6.html)
+  * [Continuação da aula 5 (finalização)](files/pdf/continuacao_aula5.pdf)
 
 
 ###  Assuntos adicionais
@@ -35,6 +37,7 @@
 
 ### Arquivos
 * [**Super Arcade (Arte utilizada na apostila)**](files/download/Super Arcade Texture.zip)
+* [**Compilado de texturas**](files/download/_CompiladoTexturas.zip)
 * [Kiwi Texture](files/download/Kiwi Texture.zip)
 * [Minecraft Texture](files/download/Minecraft Texture.zip)
 * [Morenie Small Texture](files/download/Morenie Small Texture.zip)
