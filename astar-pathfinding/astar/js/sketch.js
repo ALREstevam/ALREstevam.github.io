@@ -155,9 +155,11 @@ function defineRiskAreas(){
     for(i = 0; i < start.neighbors.length; i++){
         start.neighbors[i].risk = 0;
     }
-
     cleanMark();
 }
+
+
+
 
 function countTotalWalkableNodes() {
     var i, j;
@@ -322,10 +324,8 @@ function generateHeuristicFormula() {
 }
 
 function changeHeuristicFormulaView(){
-    var formulaHtml = "<span class='formula'>f(n) =1 + w * (y * dif(n) + z * rsk(n)) + x *(h(n))</span><br>";
-    formulaHtml += "<span class='formula'>"+ generateHeuristicFormula() +"</span>";
-
-    //f(n) = 1 + w * (y * dif(n) + z * rsk(n)) + x *(h(n))
+    var formulaHtml = "Fórmula base: <span class='formula'>f(n) =1 + w * (y * dif(n) + z * rsk(n)) + x *(h(n))</span><br>";
+    formulaHtml += "Nova Heurística: <span class='formula'>"+ generateHeuristicFormula() +"</span>";
 
     heuristicFormula.html(formulaHtml);
 
@@ -507,6 +507,62 @@ function mantainPathClean() {
 
 
 function mouseIsOverSquare(element){
+    showToolipOnCell(element);
+    drawWithMouse(element);
+}
+
+
+
+function mouseIsOutOfCanvas() {
+    hideToolipOnCell();
+}
+
+
+
+var brushTypes = ['off', 'water', 'terrain', 'risk', 'road'];
+var brushType = brushTypes[0];
+
+function drawWithMouse(element) {
+    if(mouseIsPressed){
+        if (mouseButton === LEFT) {
+
+            switch (brushType){
+                case brushTypes[1]:
+                    element.wall = true;
+                    if(element.isRoad){
+                        element.isRoad = false;
+                    }
+                    break;
+                case brushTypes[2]:
+                    element.wall = false;
+                    break;
+                case brushTypes[3]:
+                    var initialRiskAmount = floor(random(50, heuristic(start, end)/3));
+                    var riskLevels = 1 + random(1, 2) * 2;
+                    var riskAreaSize = ceil(riskLevels * riskLevels);
+                    element.setRisk(riskAreaSize,0,initialRiskAmount);
+                    cleanMark();
+                    break;
+                case brushTypes[4]:
+                    element.setRoad();
+                    break;
+                default:
+                    break;
+            }
+
+
+
+
+        }
+        /*if (mouseButton === RIGHT) {
+
+        }
+        if (mouseButton === CENTER) {
+        }*/
+    }
+}
+
+function showToolipOnCell(element) {
     var htmlVal = '<strong>Mouse sobre o nó: </strong> (x: '+element.x+', y: '+ element.y + ')';
 
     if(element == end){
@@ -528,9 +584,6 @@ function mouseIsOverSquare(element){
     if(element.risk > 0){
         htmlVal += " com risco";
     }
-
-
-
 
     if(element.wall){
         htmlVal += '<br><strong>dificuldade:</strong> -';
@@ -566,14 +619,15 @@ function mouseIsOverSquare(element){
         'color: ' + otherColor +';' +
         'border: solid 1px ' + otherColor + ';'
     );
-
 }
 
-
-
-function mouseIsNotOverSquare() {
+function hideToolipOnCell() {
     divTextAboutNode.style('visibility: hidden;');
 }
+
+
+
+
 
 
 function saveExecution() {

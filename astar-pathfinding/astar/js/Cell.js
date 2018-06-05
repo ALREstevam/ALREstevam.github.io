@@ -221,7 +221,7 @@ Cell.prototype.show = function () {
         //Normal cell
         r = 32;
         //g = 255 - ((this.difficulty * 3) / bestPathDifficultyImportance);
-        g = map(this.difficulty, 3, calculateMaxDifficulty(), 100, 255);
+        g = 300 - map(this.difficulty, 3, calculateMaxDifficulty(), 100, 255);
         b = 0;
     }
 
@@ -307,6 +307,13 @@ Cell.prototype.setRoad = function(){
     this.risk = 0;
     this.isRoad = true;
     this.wall = false;
+};
+
+Cell.prototype.setCellAsWall = function(){
+    this.difficulty = 0;
+    this.risk = 0;
+    this.isRoad = false;
+    this.wall = true;
 };
 
 function calculateMaxDifficulty() {

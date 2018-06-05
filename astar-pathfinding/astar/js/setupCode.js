@@ -1,7 +1,6 @@
 /**
  * Created by andre on 23/05/2018.
  */
-"use strict";
 
 /*
  * Este algoritmo gera um mapa e usa de algum algoritmo de busca com ou sem heurística para encontrar um caminho
@@ -160,7 +159,7 @@ function setup() {
     var mycanvas = createCanvas(600, 600);
     background(0);
     mycanvas.parent("leftSection");
-    mycanvas.mouseOut(mouseIsNotOverSquare);
+    mycanvas.mouseOut(mouseIsOutOfCanvas);
 
     w = width/cols;
     h = height/rows;
@@ -266,7 +265,7 @@ function setup() {
 
     var setHeuristicButton = createButton('Definir nova heurística');
     setHeuristicButton.parent('confirmBtn');
-    setHeuristicButton.class('defaultButton redButton center');
+    setHeuristicButton.class('defaultButton redButton center centerInModal');
     setHeuristicButton.mousePressed(updateHeuristic);
 
     
@@ -351,7 +350,8 @@ function setup() {
     //TOOLTIP TEXT COM INFORMAÇÕES DO NÓ
 
     divTextAboutNode = createDiv();
-    divTextAboutNode.style('position: absolute; visibility: hidden; background:rgba(255, 255, 255, 0.7); padding:10px; transition: background .5s, visibility .5s;');
+    //divTextAboutNode.style();
+    divTextAboutNode.class('nodeTooltip');
     divTextAboutNode.position(0, 0);
     mouseOverText = createP('<strong>Mouse sob o nó: </strong> (x: ?, y: ?)');
     mouseOverText.parent(divTextAboutNode);
