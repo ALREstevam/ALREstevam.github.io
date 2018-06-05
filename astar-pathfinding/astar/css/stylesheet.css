@@ -33,7 +33,21 @@ body {
     font-family: "Cambria Math", Cambria, Georgia, serif;
     font-size: 20px;
     font-weight: bold;
+    transition:  transform 2s;
 }
+
+.formulaVariable{
+    color: rgba(228, 63, 0, 0.96);
+}
+
+.formulaColor1{
+    color: rgba(0, 152, 1, 0.96);
+}
+
+.formulaColor2{
+    color: rgba(0, 75, 228, 0.96);
+}
+
 
 .row {
     display: flex;
@@ -161,9 +175,12 @@ body {
 .mainFormula{
     text-align: center;
     line-height: 20pt;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3px;
+    margin-bottom: 3px;
     width: 70%;
-    border: 3px solid green;
+    border: 2px dashed #80000b;
     padding: 10px;
     display: block;
     font-size: 20pt;

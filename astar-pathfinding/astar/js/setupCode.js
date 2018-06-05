@@ -27,12 +27,15 @@
 var distanceHeuristicTypes = ['Euclidean', 'Manhattan'];
 
 /*Cálculo da distância entre dois nós*/
-function heuristic(a, b, distance) {
+function cellDistance(a, b, distance) {
 
+    if(a == undefined  || b == undefined){
+        return 0;
+    }
     var d;
     if(distance == distanceHeuristicTypes[0]){
         //Euclidean distance
-        d = floor(dist(a.x, a.y, b.x, b.y));
+        d = dist(a.x, a.y, b.x, b.y);
     }else{
         //Manhattan distance
         d = abs(a.x - b.x) + abs(a.y - b.y);
@@ -242,7 +245,7 @@ function setup() {
     wValueInput.parent("editwx");
 
     xValueText = createP("x: controla <span class='formula'>h(n)</span>").parent("editwx");
-    xValueInput = createSlider(0,2, 1, 0.1);//min, max, value, step
+    xValueInput = createSlider(0,1, 1, 0.1);//min, max, value, step
     xValueInput.parent("editwx");
 
     yValueText = createP("w: controla <span class='formula'>dif(n)</span>").parent("edityz");
@@ -260,6 +263,22 @@ function setup() {
 
     heuristicFormula = createP("<span class='formula'>f(n) = w * (1 + y * dif(n) + z * rsk(n)) + x *(h(n))</span><br><span class='formula'>f(n) = w * (1 + y * dif(n) + z * rsk(n)) + x *(h(n))</span>");
     heuristicFormula.parent('resutlFormula');
+
+
+    var setAstarButton = createButton('A*');
+    setAstarButton.parent('algChoices');
+    setAstarButton.class('defaultButton blueButton');
+    setAstarButton.mousePressed(setSlidersToAStar);
+
+    var setAstarButton = createButton('Best First (com backtracking)');
+    setAstarButton.parent('algChoices');
+    setAstarButton.class('defaultButton blueButton');
+    setAstarButton.mousePressed(setSlidersToBestFirst);
+
+    var setBlindSeatchButton = createButton('Busca cega em amplitude');
+    setBlindSeatchButton.parent('algChoices');
+    setBlindSeatchButton.class('defaultButton blueButton');
+    setBlindSeatchButton.mousePressed(setSlidersToAmplitude);
 
     changeHeuristicFormulaView();
 
@@ -366,4 +385,3 @@ function setup() {
     // CHAMANDO FUNÇÃO DE RESET
     reset();
 }
-

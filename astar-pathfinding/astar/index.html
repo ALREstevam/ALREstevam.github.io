@@ -105,10 +105,19 @@
 
                      Vale ressaltar que o usuário tem liberdade para manipular os valores dos pesos, escolhendo assim qual algoritmo deseja usar.
                      <br>
-                     <strong>Fórmula Geral:</strong><br>
 
+                     <strong>Para o A*:</strong><br>
+                     <span class='formula mainFormula'>f(n) = <span class="formulaColor1">g(n)</span> + <span class="formulaColor2">h(n)</span></span>
+                     <span class='formula mainFormula'>f(n) = w * <span class="formulaColor1">( y * dif(n) + z * rsk(n) + dist(previous, n))</span>+ x * <span class="formulaColor2">h(n)</span></span>
 
-                     <span class='formula mainFormula'>f(n) = 1 + w * <span style="color: red">( y * dif(n) + z * rsk(n))</span>+ x * h(n)</span>
+                     <strong>Para o Best First:</strong><br>
+                     <span class='formula mainFormula'>f(n) = <span class="formulaColor2">h(n)</span></span>
+                     <span class='formula mainFormula'>f(n) = x * <span class="formulaColor2">h(n)</span></span>
+
+                     <!--
+                     <strong>Onde:</strong><br>
+                     <span class="forula formulaColor2">h(n)</span> é a distância do nó <span class="formula formula">n</span> até o nó objetivo.
+                      -->
 
                      <br>
                      <strong>Descrição das partes da fórmula:</strong>
@@ -120,10 +129,11 @@
                          <div class="column">
                              <ul>
                                  <li><span class='formula'>n</span>: nó para o qual a função heurística será calculada.</li>
-                                 <li><span class='formula'>1</span>:  distância para andar de um nó ao outro.</li>
-                                 <li><span class='formula'>2</span>: peso que controla a importância de <span class='formula'>g(n)</span>, sendo considerados valores entre 0 e 1.</li>
-                                 <li><span class='formula'>( y * dif(n) + z * rsk(n))</span>: cálculo de <span class='formula'>g(n)</span>, considerando dificuldades e riscos para percorrer o caminho do nó inicial até o nó objetivo.</li>
+                                 <!--<li><span class='formula'>1</span>:  distância para andar de um nó ao outro.</li>-->
+                                 <li><span class='formula'>w</span>: peso que controla a importância de <span class='formula'>g(n)</span>, sendo considerados valores entre 0 e 1.</li>
+                                 <li><span class='formula'>( y * dif(n) + z * rsk(n) + dist(previous, n))</span>: cálculo de <span class='formula'>g(n)</span>, considerando de forma acumulada o tamanho, risco e dificuldade do caminho.</li>
                                  <li><span class='formula'>y</span>: peso que controla a importância de <span class='formula'>dif(n)</span>, sendo considerados valores entre 0 e 1.</li>
+                                 <li><span class="formula">dist(p0, p1)</span>: é uma função que calcula a distância (Euclidiana ou Manhattan) entre dois nós.</li>
                              </ul>
                          </div>
 
@@ -164,6 +174,12 @@
                      </div>
                      -->
 
+
+                     <div id="algChoices">
+                         <strong>Definir algoritmo utilizado</strong><br>
+
+
+                     </div>
                      <div id="resutlFormula" style="text-align: center">
                      </div>
                      <div class="row">

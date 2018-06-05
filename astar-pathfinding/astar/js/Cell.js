@@ -83,7 +83,7 @@ Cell.prototype.addNeibors = function (grd, isDiagonal) {
     for(var i = 0; i < tempArr.length; i++){
         if(!tempArr[i].wall && currentIteration < maxIterations){
             tempArr[i].setRisk(maxIterations, currentIteration + 1);
-            this.risk = floor(random(50, heuristic(start, end)/5));
+            this.risk = floor(random(50, cellDistance(start, end)/5));
         }
     }
 };*/
@@ -317,5 +317,5 @@ Cell.prototype.setCellAsWall = function(){
 };
 
 function calculateMaxDifficulty() {
-    return floor(abs(heuristic(start, end, choosenDistanceMethod)/2));
+    return floor(abs(cellDistance(start, end, choosenDistanceMethod)/2));
 }

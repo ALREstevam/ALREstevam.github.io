@@ -90,7 +90,7 @@ function defineStartEndPoints() {
 
     //Colocando o ponto inicial na lista de nós abertos
     start.g = 0;
-    start.h = heuristic(start, end, choosenDistanceMethod);
+    start.h = cellDistance(start, end, choosenDistanceMethod);
     start.f = start.g + start.h;
     openSet.push(start);
 }
@@ -138,7 +138,7 @@ function defineRiskAreas(){
 
         var riskLevels = 1 + random(1, 2) * 2;
         var riskAreaSize = ceil(riskLevels * riskLevels);
-        var initialRiskAmount = floor(random(50, heuristic(start, end)/3));
+        var initialRiskAmount = floor(random(50, cellDistance(start, end)/3));
         var riskX = ceil(random(0, rows-1));
         var riskY = ceil(random(0, cols-1));
 
@@ -263,7 +263,8 @@ function calcPathCost(arr) {
 
     for(i = 0; i < pathLenValue; i++){
         var nodeElem = arr[i];
-        cost += 1 + nodeElem.difficulty + nodeElem.risk /*+ heuristic(path[i], end, choosenDistanceMethod)*/;
+        
+        cost += cellDistance(nodeElem, nodeElem.previous, choosenDistanceMethod) + nodeElem.difficulty + nodeElem.risk /*+ cellDistance(path[i], end, choosenDistanceMethod)*/;
     }
 
     return cost;
@@ -291,49 +292,93 @@ function configsChanged() {
 }
 
 
-function generateHeuristicFormula() {
-    var formula = "f(n) = 1";
-    if(wValueInput.value() != 0 && (yValueInput.value() != 0 || zValueInput.value() != 0)){
-        formula += ' + ';
-        formula +=  wValueInput.value() + " * ( ";
-        if(yValueInput.value() != 0){
-            formula += yValueInput.value() + " * dif(n)";
-        }
+function generateHeuristicFormulaHtml(showNumbers) {
+    var gnw = wValueInput.value();
+    var hnw = xValueInput.value();
+    var difnw = yValueInput.value();
+    var riskw = zValueInput.value();
 
-        if(yValueInput.value() != 0 && zValueInput.value() != 0){
-            formula += " + ";
-        }
+    var valueg;
+    var valueh;
+    var valuedif;
+    var valuerisk;
 
-        if(zValueInput.value() != 0){
-            formula += zValueInput.value() + " * rsk(n)";
-        }
-        formula += " ) ";
-
-        if(xValueInput.value() != 0){
-            formula += " + ";
-        }
+    if(showNumbers){
+        valueg = "<span class='formulaVariable'>" + gnw + "</span>";
+        valueh = "<span class='formulaVariable'>" + hnw + "</span>";
+        valuedif = "<span class='formulaVariable'>" + difnw + "</span>";
+        valuerisk = "<span class='formulaVariable'>" + riskw + "</span>";
     }else{
-        if(xValueInput.value() != 0){
-            formula += ' + ';
+        valueg = "<span class='formulaVariable'>w</span>";
+        valueh = "<span class='formulaVariable'>x</span>";
+        valuedif = "<span class='formulaVariable'>y</span>";
+        valuerisk = "<span class='formulaVariable'>z</span>";
+    }
+
+
+    //Fórmula base: f(n) = w * (y * dif(n) + z * rsk(n) + dist(n, n.previous)) + x *(h(n))
+
+    var formula = "";
+
+    if((gnw == 0 && hnw == 0) || ( (hnw  == 0) && (difnw == 0 && riskw == 0)) ){
+        formula = "<strong>Sem heurística: busca cega em amplitude.</strong>";
+        return formula;
+    }
+
+    formula = "<span class='formula'>f(n) = ";
+    if(gnw > 0){
+        formula += "<span class='formulaColor1'> " + valueg + " * (";
+
+        if(difnw > 0){
+           formula += valuedif + " * dif(n)";
         }
+
+        if(difnw > 0 && riskw > 0){
+            formula += " + ";
+        }
+
+        if(riskw > 0){
+            formula += " " +valuerisk+ " * rsk(n) ";
+        }
+
+        if(difnw > 0 || riskw > 0){
+            formula += " + ";
+        }
+
+
+        formula += "dist(n, n.previous)";
+        formula += ") </span>"
     }
-    if(xValueInput.value() != 0){
-        formula += " " + xValueInput.value() + " * (h(n))";
+
+    if(hnw > 0){
+        if(gnw > 0){
+            formula += " + "
+        }
+        formula += "<span class='formulaColor2'>" + valueh + " *(dist(n, target))" + "</span>"
     }
+    formula += "</span>";
+
+    if(hnw == 1 && gnw == 1){
+        formula += " (Algoritmo A*)"
+    }
+    else if(hnw == 1 && gnw == 0){
+        formula += " (Algoritmo Best First)"
+    }
+
     return formula;
 }
 
 function changeHeuristicFormulaView(){
-    var formulaHtml = "Fórmula base: <span class='formula'>f(n) =1 + w * (y * dif(n) + z * rsk(n)) + x *(h(n))</span><br>";
-    formulaHtml += "Nova Heurística: <span class='formula'>"+ generateHeuristicFormula() +"</span>";
+    var formulaHtml = "Heurística: "+ generateHeuristicFormulaHtml(false) +"<br>";
+    formulaHtml += "Nova Heurística: "+ generateHeuristicFormulaHtml(true);
 
     heuristicFormula.html(formulaHtml);
 
 
-    wValueText.html('<strong>w: controla <span class="formula">g(n)</span>:</strong> ' +   wValueInput.value());
-    xValueText.html('<strong>x: controla <span class="formula">h(n)</span>:</strong>' +           xValueInput.value());
+    wValueText.html('<strong>w: controla <span class="formula">g(n)</span>:</strong> ' +     wValueInput.value());
+    xValueText.html('<strong>x: controla <span class="formula">h(n)</span>:</strong>' +      xValueInput.value());
     yValueText.html('<strong>y: controla <span class="formula">dif(n)</span>:</strong> ' +   yValueInput.value());
-    zValueText.html('<strong>z: controls <span class="formula">risk(n)</span>:</strong>' +           zValueInput.value());
+    zValueText.html('<strong>z: controls <span class="formula">risk(n)</span>:</strong>' +   zValueInput.value());
 }
 
 function formatItemForColumn(elem) {
@@ -537,7 +582,7 @@ function drawWithMouse(element) {
                     element.wall = false;
                     break;
                 case brushTypes[3]:
-                    var initialRiskAmount = floor(random(50, heuristic(start, end)/3));
+                    var initialRiskAmount = floor(random(50, cellDistance(start, end)/3));
                     var riskLevels = 1 + random(1, 2) * 2;
                     var riskAreaSize = ceil(riskLevels * riskLevels);
                     element.setRisk(riskAreaSize,0,initialRiskAmount);
@@ -599,7 +644,7 @@ function showToolipOnCell(element) {
         htmlVal += '<br><strong>h:</strong> ' + element.h;
     }
 
-    htmlVal += '<br><strong>Distância até objetivo:</strong> ' + heuristic(element, end, choosenDistanceMethod);
+    htmlVal += '<br><strong>Distância até objetivo:</strong> ' + cellDistance(element, end, choosenDistanceMethod);
     mouseOverText.html(htmlVal);
 
     divTextAboutNode.position(mouseX + 50, mouseY + 100);
@@ -624,11 +669,6 @@ function showToolipOnCell(element) {
 function hideToolipOnCell() {
     divTextAboutNode.style('visibility: hidden;');
 }
-
-
-
-
-
 
 function saveExecution() {
 
@@ -678,7 +718,7 @@ function saveExecution() {
 
     });
 
-    createP("<strong>Fórmula: </strong><span class='formula'>"+ generateHeuristicFormula() +"</span>").parent(colDiv2);
+    createP("<strong>Fórmula Heurística: </strong>"+ generateHeuristicFormulaHtml(true)).parent(colDiv2);
     createP("<strong>Tamanho do grid: </strong>"+ rows + " x " + cols).parent(colDiv2);
     createP("<strong>Semente para a geração do mapa: </strong>" + randomSeedInput.value()).parent(colDiv2);
     createP('<strong>Chance de um nó ser água:</strong> ' + randomObstaclePercentageSlider.value() + "\% (x100)").parent(colDiv2);
@@ -694,7 +734,28 @@ function saveExecution() {
 
 
     executionSavedModal.open();
+}
 
+function setSlidersToAStar(){
+    xValueInput.value(1);
+    wValueInput.value(1);
+    yValueInput.value(1);
+    zValueInput.value(1);
+    changeHeuristicFormulaView();
+}
 
+function setSlidersToBestFirst() {
+    xValueInput.value(1);
+    wValueInput.value(0);
+    yValueInput.value(0);
+    zValueInput.value(0);
+    changeHeuristicFormulaView();
+}
 
+function setSlidersToAmplitude() {
+    xValueInput.value(0);
+    wValueInput.value(0);
+    yValueInput.value(0);
+    zValueInput.value(0);
+    changeHeuristicFormulaView();
 }

@@ -17,7 +17,6 @@ function pathfindStep() {
     var i;
     var opensetLen = openSet.length;
 
-
     if(openSet.length > 0){//Enquanto houverem nós na lista de nós abertos, a busca pode continuar
         //BUSCANDO
         //Encontrando o nó com menor custo (f) dentro da lista de nós abertos
@@ -43,8 +42,6 @@ function pathfindStep() {
             */
             current.inClosedSet = true;
         }
-
-
         //Criando variáveis locais para não ter que usar a definição mais longa
         var neighbors = current.neighbors;
         var neighborsLen = neighbors.length;
@@ -64,8 +61,6 @@ function pathfindStep() {
             e então devo continuar procurando, o nó final é mantido na lista de nós abertos
             */
             if(openSet[lowIndex2].f >= current.f){
-
-
                 /*removeFromArray(openSet, current);
                 closeSet.push(current);
                 current.inClosedSet = true;*/
@@ -96,9 +91,10 @@ function pathfindStep() {
             //Caso o vizinho em questão não esteja fechado e não seja uma barreira então deve ser levado em consideração
             if(!closeSet.includes(neighbour) && !neighbour.wall){
                 //Cálculo de um g(n) temporário para o vizinho em questão
-                var tempg = (current.g +  (yWeight * neighbour.difficulty) + (zWeight * neighbour.risk));
+                var tempg = (current.g +  (yWeight * neighbour.difficulty) + (zWeight * neighbour.risk) + cellDistance(current, neighbour, choosenDistanceMethod));
 
-                /*Obs.: o vizinho pode ser um nó já aberto, portanto tem um valor de g ou um nó não aberto e tem que
+                /*
+                Obs.: o vizinho pode ser um nó já aberto, portanto tem um valor de g ou um nó não aberto e tem que
                 receber um valor de g
                  */
 
@@ -112,7 +108,8 @@ function pathfindStep() {
                 }else{//Se o nó não foi aberto ainda
                     neighbour.g = tempg;//definindo o g do nó
                     openSet.push(neighbour);//colocando o nó na lista de abertos
-                    /*dizendo para o nó que ele está na lista (evita ter que procurar novamente e deixa)
+                    /*
+                    dizendo para o nó que ele está na lista (evita ter que procurar novamente e deixa)
                     a forma como o nó é mostrado variar independentemente dos vetores
                      */
                     neighbour.inOpenSet = true;
@@ -122,8 +119,8 @@ function pathfindStep() {
                 //Se existe um novo caminho feito
                 if(newPath){
                     //Cálculo da heurística
-                    neighbour.h = parseFloat((xWeight * heuristic(neighbour, end, choosenDistanceMethod)).toFixed(4));//cálculo do h
-                    neighbour.f = parseFloat(( (1 + (wWeight * neighbour.g) + neighbour.h) ).toFixed(4));//cálculo do f
+                    neighbour.h = parseFloat((xWeight * cellDistance(neighbour, end, choosenDistanceMethod)).toFixed(4));//cálculo do h
+                    neighbour.f = parseFloat((((wWeight * neighbour.g) + neighbour.h)).toFixed(4));//cálculo do f
                     //g já foi caculado!
                     neighbour.previous = current;//dizendo para o nó quem é seu antecessor (assim é possível recuperar o caminho)
                 }
