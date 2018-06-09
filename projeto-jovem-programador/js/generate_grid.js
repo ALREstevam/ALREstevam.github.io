@@ -41,8 +41,8 @@ for(var i = 0; i < info.length; i++){
     var html =  '<a href="'+ path+'\\'+executablename +'">' +
                 '    <div class="grid-item">' +
                 '        <div>' +
-                '            <img src="'+ path + '\\' + imagename +'">' +
-                '            <span>'+ text +'</span>' +
+                '            <img src="'+ path + '\\' + imagename +'"><br>' +
+                '            <span>'+ text +'</span><br>' +
                 '        </div>' +
                 '    </div>' +
                 '</a>';
