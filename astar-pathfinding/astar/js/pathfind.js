@@ -150,3 +150,5 @@ function pathfindStep() {
         return;
     }
 }
+
+
