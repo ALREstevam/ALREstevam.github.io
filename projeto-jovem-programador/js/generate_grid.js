@@ -3,7 +3,7 @@ var imagename = "thumb.png";
 var executablename = "index.html";
 
 var info = [
-    {"text":"Projeto finalizado",          "path":"executaveis\\Nosso\\final"},
+    {"text":"Projeto finalizado",          "path":"executaveis\\Nosso\\finalii"},
     {"text":"Aula 1",          "path":"executaveis\\Nosso\\aula1"},
     {"text":"Aula 2",          "path":"executaveis\\Nosso\\aula2-1"},
     {"text":"Aula 2 (correção)",          "path":"executaveis\\Nosso\\aula2-2"},
