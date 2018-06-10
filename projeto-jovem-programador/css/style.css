@@ -91,8 +91,13 @@ button {
 
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+
+    flex-flow: row wrap;
     padding: 30px;
+    grid-gap: 10px;
+    height: calc(100vh - 10px);
 }
 
 .grid-item {
@@ -100,10 +105,38 @@ button {
     padding: 0;
     font-size: 30px;
     text-align: center;
-    margin: 20px;
     cursor: pointer;
-    transition: all .1s ease;
+    transition: all .1s;
+    border-radius: 5px;
+    border: solid 3px #333333;
+    height: 100%;
 }
+
+.grid-item:hover{
+    z-index: 99999;
+    transform: scale(1.1);
+}
+
+.grid-container a:link{
+    font-style: normal;
+    text-decoration: none;
+}
+
+.grid-container a:visited{
+    font-style: normal;
+    text-decoration: none;
+}
+
+.grid-container a:active{
+    font-style: normal;
+    text-decoration: none;
+}
+
+.grid-container a:hover{
+    background: rgba(59, 222, 0, 0.47);
+    text-decoration: underline;
+}
+
 
 
 
@@ -112,26 +145,27 @@ button {
     height: 100%;
     color: #333333;
     background-color: #777777;
-    transition: all .1s ease;
+    transition: all .1s;
 }
+
 
 .grid-item div:hover {
     background-color: rgba(184, 184, 184, 0.8);
+    z-index: auto;
 }
 
 .grid-item div span{
     width: 100%;
-    transition: all .1s ease;
+    transition: all .1s;
 }
 
 .grid-item div img{
     width: 100%;
-    transition: all .7s ease;
+    transition: all .7s;
 }
 
 .grid-item div img:hover{
     opacity: .7;
-
 }
 
 
