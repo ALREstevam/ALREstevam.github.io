@@ -1,5 +1,5 @@
 
-var imagename = "thumb.png";
+var imagename = "thumb.PNG";
 var executablename = "index.html";
 
 var info = [
